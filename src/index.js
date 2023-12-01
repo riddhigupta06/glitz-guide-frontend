@@ -4,6 +4,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import RouterErrorPage from './Router/RouterErrorPage';
 import reportWebVitals from './reportWebVitals';

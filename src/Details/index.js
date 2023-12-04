@@ -1,16 +1,16 @@
 import { Box, Heading, Text, Spinner, Image, Badge, Stack, Button } from "@chakra-ui/react";
-import axios from "axios";
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
+import * as client from "../client";
 
 export default function Details() {
     const { detailID } = useParams()
     const [product, setProduct] = useState(undefined)
 
     const fetchProduct = async () => {
-        const response = await axios.get(`https://glitz-guide-server.onrender.com/product/${detailID}`)
-        console.log(response.data)
-        setProduct(response.data)
+        const productData = await client.details(detailID);
+        console.log(productData)
+        setProduct(productData)
     }
 
     const colors = ['green', 'yellow', 'blue', 'purple', 'pink', 'red']

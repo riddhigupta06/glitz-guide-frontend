@@ -14,6 +14,8 @@ import Search from './Search';
 import Details from './Details';
 import Auth from './Auth';
 import Profile from './Profile';
+import ProtectedRoute from './Router/ProtectedRoute';
+import AnonymousRoute from './Router/AnonymousRoute';
 
 const router = createBrowserRouter([
   {
@@ -22,20 +24,20 @@ const router = createBrowserRouter([
     errorElement: <RouterErrorPage />,
     children: [
       {
-        path: "/search",
+        path: "search",
         element: <Search />,
       },
       {
         path: "login",
-        element: <Auth />,
+        element: <AnonymousRoute element={<Auth />} />,
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: <ProtectedRoute element={<Profile />} />,
       },
       {
         path: "profile/:userID",
-        element: <div>Public Profile</div>,
+        element: <ProtectedRoute element={<div>Public Profile</div>} />,
       },
       {
         path: "details/:detailID",
@@ -43,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "blog",
-        element: <div>Blog posts</div>,
+        element: <ProtectedRoute element={<div>Blog posts</div>} />,
       }
     ]
   },

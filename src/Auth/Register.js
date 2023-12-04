@@ -18,7 +18,10 @@ export default function Register() {
     const navigate = useNavigate()
 
     const handleRegister = async (values, actions) => {
-        const status = await client.register(values)
+        const res = await client.register(values)
+        if (res['status'] === 200) {
+            sessionStorage.setItem("user", JSON.stringify(res['data']['username']))
+        }
         actions.setSubmitting(false)
         navigate('/profile')
     }
@@ -27,7 +30,7 @@ export default function Register() {
         <div className="w-100">
             <Formik
                 initialValues={{ firstName: '', lastName:'', role: 'follower', email:'', username: '', password: '' }}
-                onSubmit={async (values, actions) => handleRegister(values, actions)}
+                onSubmit={async (values, actions) => await handleRegister(values, actions)}
             >
             {(props) => (
                 <Form style={{display:'flex', flexDirection:'column', alignContent:'center', justifyContent:'center', gap:'20px'}}>

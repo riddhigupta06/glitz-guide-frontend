@@ -15,7 +15,10 @@ export default function Login() {
     const navigate = useNavigate()
 
     const handleLogin = async (values, actions) => {
-        const status = await client.login(values)
+        const res = await client.login(values)
+        if (res['status'] === 200) {
+            sessionStorage.setItem("user", JSON.stringify(res['data']['username']))
+        }
         actions.setSubmitting(false)
         navigate('/profile')
     }
@@ -24,7 +27,7 @@ export default function Login() {
         <div className="w-100">
             <Formik
                 initialValues={{ username: '', password: '' }}
-                onSubmit={async (values, actions) => handleLogin(values, actions)}
+                onSubmit={async (values, actions) => await handleLogin(values, actions)}
             >
             {(props) => (
                 <Form style={{display:'flex', flexDirection:'column', alignContent:'center', justifyContent:'center', gap:'10px'}}>

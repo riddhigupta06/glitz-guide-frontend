@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@chakra-ui/react";
+import * as client from '../client';
 
 export default function Root() {
 
@@ -30,23 +31,25 @@ export default function Root() {
                             Blog Posts
                         </div>
                     </NavLink>
-                    {/* TODO: remove profile link from nav once setup somewhere else */}
-                    <NavLink className="nav-link" exact="true" to={`/profile`}>
-                        <div onClick={() => setToggleMenuOpened(false)}>
-                            Your Profile
-                        </div>
-                    </NavLink>
                     {/* TODO: remove profile/userID link from nav once setup somewhere else */}
                     <NavLink className="nav-link" exact="true" to={`/profile/1`}>
                         <div onClick={() => setToggleMenuOpened(false)}>
                             Public Profile
                         </div>
                     </NavLink>
-                    <NavLink className="nav-link" exact="true" to={`/login`}>
-                        <div onClick={() => setToggleMenuOpened(false)}>
-                            Login
-                        </div>
-                    </NavLink>
+                    {sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === 'null' ? (
+                        <NavLink className="nav-link" exact="true" to={`/login`}>
+                            <div onClick={() => setToggleMenuOpened(false)}>
+                                Login
+                            </div>
+                        </NavLink>
+                    ) : (
+                        <NavLink className="nav-link" exact="true" to={`/profile`}>
+                            <div onClick={() => setToggleMenuOpened(false)}>
+                                Profile
+                            </div>
+                        </NavLink>
+                    )}
                 </div>
             </div>
         )
@@ -65,15 +68,21 @@ export default function Root() {
                         <div className="navbar-nav gap-5 align-items-center w-100">
                             <NavLink className="nav-link" exact="true" to={`/search`}>Search</NavLink>
                             <NavLink className="nav-link" exact="true" to={`/blog`}>Blog Posts</NavLink>
-                            {/* TODO: remove profile link from nav once setup somewhere else */}
-                            <NavLink className="nav-link" exact="true" to={`/profile`}>Your Profile</NavLink>
                             {/* TODO: remove profile/userID link from nav once setup somewhere else */}
                             <NavLink className="nav-link" exact="true" to={`/profile/1`}>Public Profile</NavLink>
-                            <NavLink className="nav-link ms-auto" exact="true" to={`/login`}>
-                                <Button variant='solid' colorScheme='pink'>
-                                    Login
-                                </Button>
-                            </NavLink>
+                            {sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === 'null' ? (
+                                <NavLink className="nav-link ms-auto" exact="true" to={`/login`}>
+                                    <Button variant='solid' colorScheme='pink'>
+                                        Login
+                                    </Button>
+                                </NavLink>
+                            ) : (
+                                <NavLink className="nav-link ms-auto" exact="true" to={`/profile`}>
+                                    <Button variant='solid' colorScheme='pink'>
+                                        Profile
+                                    </Button>
+                                </NavLink>
+                            )}
                         </div>
                     </div>
                 </div>

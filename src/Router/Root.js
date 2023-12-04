@@ -28,12 +28,6 @@ export default function Root() {
                             Blog Posts
                         </div>
                     </NavLink>
-                    {/* TODO: remove details link from nav once setup from search page */}
-                    <NavLink className="nav-link" exact="true" to={`/details/1`}>
-                        <div onClick={() => setToggleMenuOpened(false)}>
-                            Details
-                        </div>
-                    </NavLink>
                     {/* TODO: remove profile link from nav once setup somewhere else */}
                     <NavLink className="nav-link" exact="true" to={`/profile`}>
                         <div onClick={() => setToggleMenuOpened(false)}>
@@ -69,8 +63,6 @@ export default function Root() {
                         <div className="navbar-nav gap-5 align-items-center w-100">
                             <NavLink className="nav-link" exact="true" to={`/search`}>Search</NavLink>
                             <NavLink className="nav-link" exact="true" to={`/blog`}>Blog Posts</NavLink>
-                            {/* TODO: remove details link from nav once setup from search page */}
-                            <NavLink className="nav-link" exact="true" to={`/details/1`}>Details</NavLink>
                             {/* TODO: remove profile link from nav once setup somewhere else */}
                             <NavLink className="nav-link" exact="true" to={`/profile`}>Your Profile</NavLink>
                             {/* TODO: remove profile/userID link from nav once setup somewhere else */}

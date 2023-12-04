@@ -11,6 +11,7 @@ import RouterErrorPage from './Router/RouterErrorPage';
 import reportWebVitals from './reportWebVitals';
 import Root from './Router/Root';
 import Search from './Search';
+import Details from './Details';
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: "details/:detailID",
-        element: <div>Details</div>,
+        element: <Details />,
       },
       {
         path: "blog",

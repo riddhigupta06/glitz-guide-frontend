@@ -12,6 +12,7 @@ import reportWebVitals from './reportWebVitals';
 import Root from './Router/Root';
 import Search from './Search';
 import Details from './Details';
+import Auth from './Auth';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <div>Login</div>,
+        element: <Auth />,
       },
       {
         path: "profile",

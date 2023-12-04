@@ -90,23 +90,6 @@ export default function Register() {
                             </FormControl>
                         )}
                     </Field>
-                    {/* <Field name='role'>
-                        {({ field, form }) => (
-                            <FormControl isInvalid={form.errors.role && form.touched.role}>
-                                <FormLabel>Role</FormLabel>
-                                <RadioGroup {...field}>
-                                    <Stack spacing={5} direction='row'>
-                                        <Radio colorScheme='purple' value='follower'>
-                                            Follower
-                                        </Radio>
-                                        <Radio colorScheme='purple' value='influencer'>
-                                            Influencer
-                                        </Radio>
-                                    </Stack>
-                                </RadioGroup>
-                            </FormControl>
-                        )}
-                    </Field> */}
                     <Button
                         mt={4}
                         colorScheme='pink'

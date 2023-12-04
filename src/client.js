@@ -42,6 +42,5 @@ export const logout = async () => {
 // account endpoint
 export const account = async () => {
     const response = await request.post(`${BASE_API}/account`)
-    console.log('response', response, response.data)
     return response.data
 }

@@ -10,7 +10,7 @@ export default function Profile() {
 
     const fetchAccount = async () => {
         const data = await client.account();
-        // setProfile(data)
+        setProfile(data)
     }
 
     const handleLogout = async () => {
@@ -33,7 +33,7 @@ export default function Profile() {
 
             {profile !== undefined && (
                 <div>
-                    {JSON.parse(profile)}
+                    <p>Username: {profile.username}</p>
                 </div>
             )}
         </Box>

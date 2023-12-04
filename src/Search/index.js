@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import { Heading, Box, HStack, Select, Button, Spinner, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb } from "@chakra-ui/react";
 import { brands, productTypes } from "./data";
 import { useSearchParams } from "react-router-dom";
-import axios from "axios";
+import * as client from "../client";
 
 export default function Search() {
     const [products, setProducts] = useState([]);
@@ -33,7 +33,7 @@ export default function Search() {
         }
 
         if (searchQuery === "?") {
-            return undefined
+            return ""
         } else {
             return searchQuery
         }
@@ -41,10 +41,9 @@ export default function Search() {
 
     const fetchProducts = async () => {
         const searchQuery = getSearchQuery()
-        const API_URL = `https://glitz-guide-server.onrender.com/search/${pageIndex}${searchQuery === undefined ? '' : searchQuery}`
-        const response = await axios.get(API_URL)
-        setProducts([...products, ...response.data.data])
-        setTotalProducts(response.data.total)
+        const data = await client.search(pageIndex, searchQuery)
+        setProducts([...products, ...data.data])
+        setTotalProducts(data.total)
         setIsLoading(false)
         setLoadMoreDisabled(false)
     }

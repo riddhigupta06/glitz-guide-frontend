@@ -5,10 +5,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
+import { ChakraProvider } from '@chakra-ui/react'
 import './index.css';
 import RouterErrorPage from './Router/RouterErrorPage';
 import reportWebVitals from './reportWebVitals';
 import Root from './Router/Root';
+import Search from './Search';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/search",
-        element: <div>Search</div>,
+        element: <Search />,
       },
       {
         path: "login",
@@ -47,7 +49,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ChakraProvider>
+      <RouterProvider router={router} />
+    </ChakraProvider>
   </React.StrictMode>
 );
 

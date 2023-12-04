@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from "@fortawesome/free-solid-svg-icons";
 
 export default function Root() {
 
+    const location = useLocation()
     const [toggleMenuOpened, setToggleMenuOpened] = useState(false);
 
     const renderToggleMenu = () => {
@@ -79,7 +80,13 @@ export default function Root() {
             </div>
             {toggleMenuOpened && renderToggleMenu()}
             <div id="detail">
-                <Outlet />
+                {location.pathname === "/" ? (
+                    <div>
+                        Welcome to Glitz Guide!
+                    </div>
+                ) : (
+                    <Outlet />
+                )}
             </div>
         </div>
     );

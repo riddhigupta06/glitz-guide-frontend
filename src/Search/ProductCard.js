@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, CardBody, Stack, Text, Image, Heading, Button, CardFooter } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const ProductCard = ({
     id,

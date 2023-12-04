@@ -10,18 +10,26 @@ import {
     RadioGroup,
     Radio
 } from '@chakra-ui/react'
+import * as client from '../client'
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+
+    const navigate = useNavigate()
+
+    const handleRegister = async (values, actions) => {
+        console.log(values)
+        
+        const status = await client.register(values)
+        actions.setSubmitting(false)
+        navigate('/profile')
+    }
+
     return (
         <div className="w-100">
             <Formik
                 initialValues={{ firstName: '', lastName:'', role: 'follower', email:'', username: '', password: '' }}
-                onSubmit={(values, actions) => {
-                    setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2))
-                    actions.setSubmitting(false)
-                    }, 1000)
-                }}
+                onSubmit={async (values, actions) => handleRegister(values, actions)}
             >
             {(props) => (
                 <Form style={{display:'flex', flexDirection:'column', alignContent:'center', justifyContent:'center', gap:'20px'}}>

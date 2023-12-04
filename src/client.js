@@ -11,12 +11,18 @@ export const DETAILS_API = `${BASE_API}/product`;
 
 // search endpoint
 export const search = async (pageIndex, queryString) => {
-    const response = await request.get( `${SEARCH_API}/${pageIndex}${queryString}`);
+    const response = await request.get(`${SEARCH_API}/${pageIndex}${queryString}`);
     return response.data;
 };
 
 // product details endpoint
 export const details = async (productID) => {
-    const response = await request.get( `${DETAILS_API}/${productID}`);
+    const response = await request.get(`${DETAILS_API}/${productID}`);
     return response.data;
 };
+
+// register
+export const register = async (user) => {
+    const status = await request.post(`${BASE_API}/signup`, user)
+    return status
+}

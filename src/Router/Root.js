@@ -10,7 +10,7 @@ export default function Root() {
 
     const renderToggleMenu = () => {
         return (
-            <div className="position-absolute top-20 end-0 bg-light" style={{zIndex:1, width:'100%', height:'100%'}}>
+            <div className="position-absolute top-20 end-0 bg-light" style={{zIndex:10, width:'100%', height:'100%'}}>
                 <div className="w-100 d-flex px-5 pt-4 pb-0 justify-content-end">
                     <span onClick={() => setToggleMenuOpened(false)}>
                         <button className="btn">

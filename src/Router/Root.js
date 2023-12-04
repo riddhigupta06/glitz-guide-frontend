@@ -17,7 +17,7 @@ export default function Root() {
                         </button>
                     </span>
                 </div>
-                <div class="navbar-nav p-5 gap-5 align-items-center w-100">
+                <div className="navbar-nav p-5 gap-5 align-items-center w-100">
                     <NavLink className="nav-link" exact="true" to={`/search`}>
                         <div onClick={() => setToggleMenuOpened(false)}>
                             Search
@@ -60,13 +60,13 @@ export default function Root() {
         <div className="p-3">
             <div id="sidebar" className="d-flex gap-3 mb-3">
                 <nav className="navbar navbar-expand-lg bg-body-tertiary w-100">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="/" style={{fontWeight:700, fontSize:32}}>Glitz Guide</a>
-                    <button onClick={() => setToggleMenuOpened(!toggleMenuOpened)} class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                <div className="container-fluid">
+                    <a className="navbar-brand" href="/" style={{fontWeight:700, fontSize:32}}>Glitz Guide</a>
+                    <button onClick={() => setToggleMenuOpened(!toggleMenuOpened)} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse ms-5" id="navbarNavAltMarkup">
-                        <div class="navbar-nav gap-5 align-items-center w-100">
+                    <div className="collapse navbar-collapse ms-5" id="navbarNavAltMarkup">
+                        <div className="navbar-nav gap-5 align-items-center w-100">
                             <NavLink className="nav-link" exact="true" to={`/search`}>Search</NavLink>
                             <NavLink className="nav-link" exact="true" to={`/blog`}>Blog Posts</NavLink>
                             {/* TODO: remove details link from nav once setup from search page */}

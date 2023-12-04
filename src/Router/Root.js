@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "@chakra-ui/react";
 
 export default function Root() {
 
@@ -69,9 +70,9 @@ export default function Root() {
                             {/* TODO: remove profile/userID link from nav once setup somewhere else */}
                             <NavLink className="nav-link" exact="true" to={`/profile/1`}>Public Profile</NavLink>
                             <NavLink className="nav-link ms-auto" exact="true" to={`/login`}>
-                                <button className="btn btn-primary">
+                                <Button variant='solid' colorScheme='pink'>
                                     Login
-                                </button>
+                                </Button>
                             </NavLink>
                         </div>
                     </div>

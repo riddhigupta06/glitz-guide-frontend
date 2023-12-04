@@ -18,8 +18,6 @@ export default function Register() {
     const navigate = useNavigate()
 
     const handleRegister = async (values, actions) => {
-        console.log(values)
-        
         const status = await client.register(values)
         actions.setSubmitting(false)
         navigate('/profile')

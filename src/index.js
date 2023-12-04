@@ -13,6 +13,7 @@ import Root from './Router/Root';
 import Search from './Search';
 import Details from './Details';
 import Auth from './Auth';
+import Profile from './Profile';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <div>Profile</div>,
+        element: <Profile />,
       },
       {
         path: "profile/:userID",

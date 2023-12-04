@@ -8,7 +8,8 @@ import {
     HStack,
     Stack,
     RadioGroup,
-    Radio
+    Radio,
+    useToast
 } from '@chakra-ui/react'
 import * as client from '../client'
 import { useNavigate } from "react-router-dom";
@@ -16,11 +17,18 @@ import { useNavigate } from "react-router-dom";
 export default function Register() {
 
     const navigate = useNavigate()
+    const toast = useToast();
 
     const handleRegister = async (values, actions) => {
         const res = await client.register(values)
         if (res['status'] === 200) {
             sessionStorage.setItem("user", JSON.stringify(res['data']['username']))
+        } else if (res['status'] === 404) {
+            toast({
+                description: "The username already exists. Please choose a different one and try again!",
+                title: "Username already taken",
+                status: "info"
+            })
         }
         actions.setSubmitting(false)
         navigate('/profile')

@@ -26,7 +26,7 @@ export default function Login() {
                         {({ field, form }) => (
                             <FormControl isInvalid={form.errors.username && form.touched.username}>
                                 <FormLabel>Username</FormLabel>
-                                <Input {...field} placeholder='username' />
+                                <Input {...field} placeholder='adalovelace' />
                                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                             </FormControl>
                         )}
@@ -35,7 +35,7 @@ export default function Login() {
                         {({ field, form }) => (
                             <FormControl isInvalid={form.errors.password && form.touched.password}>
                                 <FormLabel>Password</FormLabel>
-                                <Input type="password" {...field} placeholder='password' />
+                                <Input type="password" {...field} placeholder='...' />
                                 <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                             </FormControl>
                         )}

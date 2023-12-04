@@ -42,7 +42,6 @@ export default function Search() {
     const fetchProducts = async () => {
         const searchQuery = getSearchQuery()
         const API_URL = `https://glitz-guide-server.onrender.com/search/${pageIndex}${searchQuery === undefined ? '' : searchQuery}`
-        console.log('API', API_URL)
         const response = await axios.get(API_URL)
         setProducts([...products, ...response.data.data])
         setTotalProducts(response.data.total)

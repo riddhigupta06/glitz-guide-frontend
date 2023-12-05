@@ -23,15 +23,17 @@ export default function Register() {
         const res = await client.register(values)
         if (res['status'] === 200) {
             sessionStorage.setItem("user", JSON.stringify(res['data']['username']))
+            actions.setSubmitting(false)
+            navigate('/profile')
+
         } else if (res['status'] === 400) {
             toast({
                 description: "The username already exists. Please choose a different one and try again!",
                 title: "Username already taken",
                 status: "info"
             })
+            actions.setSubmitting(false)
         }
-        actions.setSubmitting(false)
-        navigate('/profile')
     }
 
     return (

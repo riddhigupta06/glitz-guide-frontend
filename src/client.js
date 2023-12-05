@@ -23,14 +23,22 @@ export const details = async (productID) => {
 
 // register endpoint
 export const register = async (user) => {
-    const response = await request.post(`${BASE_API}/signup`, user)
-    return {status: response.status, data: response.data}
+    try {
+        const response = await request.post(`${BASE_API}/signup`, user)
+        return {status: response.status, data: response.data}
+    } catch (err) {
+        return {status: 400}
+    }
 }
 
 // login endpoint
 export const login = async (creds) => {
-    const response = await request.post(`${BASE_API}/signin`, creds)
-    return {status: response.status, data: response.data}
+    try {
+        const response = await request.post(`${BASE_API}/signin`, creds)
+        return {status: response.status, data: response.data}
+    } catch (err) {
+        return {status: 404}
+    }
 }
 
 // logout endpoint

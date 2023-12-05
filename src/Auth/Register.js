@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import {
     FormControl,
@@ -12,7 +13,6 @@ import {
     useToast
 } from '@chakra-ui/react'
 import * as client from '../client'
-import { useNavigate } from "react-router-dom";
 
 export default function Register() {
 

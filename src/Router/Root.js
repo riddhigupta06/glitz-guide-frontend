@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@chakra-ui/react";
-import * as client from '../client';
 
 export default function Root() {
 

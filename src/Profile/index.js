@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as client from '../client';
 import { Box, Button, Heading } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
     const [profile, setProfile] = useState(undefined)

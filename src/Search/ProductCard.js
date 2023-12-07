@@ -32,12 +32,12 @@ const ProductCard = ({
                     <Text color='blue.600' fontSize='lg' marginBottom={1}>
                         {product_type}
                     </Text>
-                    <Heading size='md'>{brand}</Heading>
+                    <Heading size='md'>{name}</Heading>
                     <Text padding={0} margin={0} style={{fontWeight:700}}>
                         ${(Math.round(price * 100) / 100).toFixed(2)}
                     </Text>
                     <Text padding={0}>
-                        {name}
+                        {brand}
                     </Text>
                 </Stack>
             </CardBody>

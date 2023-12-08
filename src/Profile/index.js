@@ -4,6 +4,7 @@ import { Formik, Form, Field } from "formik";
 import { Box, Button, Spinner, Heading, Badge, IconButton, Tooltip, HStack, FormControl, FormLabel, RadioGroup, Radio, Stack, Input, Textarea } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCamera, faLink, faPencil, faInfo } from '@fortawesome/free-solid-svg-icons'
+import Avatar from "../Avatar";
 import * as client from '../client';
 import "./index.css"
 import UserReviews from "./UserReviews";
@@ -60,7 +61,7 @@ export default function Profile() {
                     <div className="profile-box">
                         <div className="left-column">
                             <div className="avatar-box">
-                                avatar
+                                <Avatar title="influencer-2" />
                             </div>
                             <div className="logout-button">
                                 <Button colorScheme="pink" width={"100%"} onClick={async () => await handleLogout()}>

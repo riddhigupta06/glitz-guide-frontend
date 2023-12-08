@@ -30,7 +30,7 @@ export default function Root() {
                             Connect
                         </div>
                     </NavLink>
-                    {sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'null' && sessionStorage.getItem('role') == 'influencer' && (
+                    {sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'null' && sessionStorage.getItem('role') === 'influencer' && (
                         <NavLink className="nav-link" exact="true" to={`/discuss`}>
                             <div onClick={() => setToggleMenuOpened(false)}>
                                 Discuss
@@ -74,7 +74,7 @@ export default function Root() {
                         <div className="navbar-nav gap-5 align-items-center w-100">
                             <NavLink className="nav-link" exact="true" to={`/search`}>Search</NavLink>
                             <NavLink className="nav-link" exact="true" to={`/connect`}>Connect</NavLink>
-                            {sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'null' && sessionStorage.getItem('role') == "influencer" && (
+                            {sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'null' && sessionStorage.getItem('role') === "influencer" && (
                                 <NavLink className="nav-link" exact="true" to={`/discuss`}>Discuss</NavLink>
                             )}
                             {/* TODO: remove profile/userID link from nav once setup somewhere else */}

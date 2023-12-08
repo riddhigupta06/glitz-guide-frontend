@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Flex, Heading, Box, Button, Textarea, Text } from "@chakra-ui/react";
 import * as client from "../client"
-import { Navigate } from "react-router-dom";
 
 const ProductReviews = ({ productID }) => {
     const [reviews, setReviews] = useState(undefined);

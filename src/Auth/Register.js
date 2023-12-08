@@ -13,12 +13,14 @@ import {
     Textarea,
     useToast,
     Tooltip,
-    IconButton
+    IconButton,
+    Box
 } from '@chakra-ui/react'
 import * as client from '../client'
 import * as Yup from 'yup'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import Avatar from "../Avatar";
 
 const SignupSchema = Yup.object().shape({
     firstName: Yup.string().required('Required'),
@@ -29,7 +31,8 @@ const SignupSchema = Yup.object().shape({
     password: Yup.string().required('Required'),
     instagram: Yup.string(),
     website: Yup.string(),
-    bio: Yup.string().max(200)
+    bio: Yup.string().max(200),
+    avatar: Yup.string().required('Required')
 });
 
 export default function Register() {
@@ -58,7 +61,7 @@ export default function Register() {
     return (
         <div className="w-100">
             <Formik
-                initialValues={{ firstName: '', lastName:'', role: 'follower', email:'', username: '', password: '', instagram: '', website: '', bio: '' }}
+                initialValues={{ firstName: '', lastName:'', role: 'follower', email:'', username: '', password: '', instagram: '', website: '', bio: '', avatar: '' }}
                 onSubmit={async (values, actions) => await handleRegister(values, actions)}
                 validationSchema={SignupSchema}
             >
@@ -117,6 +120,37 @@ export default function Register() {
                                         </Radio>
                                         <Radio {...field} colorScheme='purple' value='influencer'>
                                             Influencer
+                                        </Radio>
+                                    </Stack>
+                                </RadioGroup>
+                            </FormControl>
+                        )}
+                    </Field>
+                    <Field name='avatar'>
+                        {({ field, form }) => (
+                            <FormControl id={'avatar'} isInvalid={!!form.errors['avatar'] && !!form.touched['avatar']}>
+                                <FormLabel htmlFor={'avatar'}>Avatar</FormLabel>
+                                <RadioGroup {...field} id={'avatar'}>
+                                    <Stack spacing={5} direction='row'>
+                                        <Radio {...field} colorScheme='purple' value={props.values.role+'-1'}>
+                                            <Box width={100}>
+                                                <Avatar title={`${props.values.role}-1`} />
+                                            </Box>
+                                        </Radio>
+                                        <Radio {...field} colorScheme='purple' value={props.values.role+'-2'}>
+                                            <Box width={100}>
+                                                <Avatar title={`${props.values.role}-2`} />
+                                            </Box>
+                                        </Radio>
+                                        <Radio {...field} colorScheme='purple' value={props.values.role+'-3'}>
+                                            <Box width={100}>
+                                                <Avatar title={`${props.values.role}-3`} />
+                                            </Box>
+                                        </Radio>
+                                        <Radio {...field} colorScheme='purple' value={props.values.role+'-4'}>
+                                            <Box width={100}>
+                                                <Avatar title={`${props.values.role}-4`} />
+                                            </Box>
                                         </Radio>
                                     </Stack>
                                 </RadioGroup>

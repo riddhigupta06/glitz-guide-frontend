@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faCamera, faLink, faPencil } from '@fortawesome/free-solid-svg-icons'
 import * as client from '../client';
 import "./index.css"
-import { Box, Button, Spinner, Heading, Badge, IconButton } from "@chakra-ui/react";
+import { Box, Button, Spinner, Heading, Badge, IconButton, Tooltip } from "@chakra-ui/react";
 
 export default function Profile() {
     const [profile, setProfile] = useState(undefined)
@@ -78,24 +78,39 @@ export default function Profile() {
                                     Editing...
                                 </div>
                             ) : (
-                                <div>
+                                <>
                                     <div><strong>Username:</strong> {profile.username}</div>
-                                    <div><strong>First name:</strong> {profile.firstName}</div>
-                                    <div><strong>Last name:</strong> {profile.lastName}</div>
+                                    <div><strong>Name:</strong> {profile.firstName} {profile.lastName}</div>
                                     <div><strong>Email:</strong> {profile.email}</div>
                                     <div><strong>Role:</strong> {getUserRole(profile.role)}</div>
                                     {profile.role === "influencer" && (
                                         <>
-                                            <div><strong>Instagram:</strong> {profile.instagram}</div>
-                                            <div><strong>Website:</strong> {profile.website}</div>
                                             <div><strong>Bio:</strong> {profile.bio}</div>
-                                            {/* <div>
-                                            <a href="#"><FontAwesomeIcon icon={} /></a>
-                                            <a href="#"><FontAwesomeIcon icon={} /></a>
-                                            </div> */}
+                                            <div style={{display: 'flex', flexDirection: 'row', gap:5}}>
+                                                <a href={"https://www.instagram.com/"+profile.instagram} target="_blank">
+                                                    <Tooltip label="Instagram">
+                                                        <IconButton
+                                                            colorScheme='pink'
+                                                            aria-label='instagram'
+                                                            size='md'
+                                                            icon={<FontAwesomeIcon icon={faCamera} />}
+                                                        />
+                                                    </Tooltip>
+                                                </a>
+                                                <a href={"https://" + profile.website} target="_blank">
+                                                    <Tooltip label="Website">
+                                                        <IconButton
+                                                            colorScheme='pink'
+                                                            aria-label='website'
+                                                            size='md'
+                                                            icon={<FontAwesomeIcon icon={faLink} />}
+                                                        />
+                                                    </Tooltip>
+                                                </a>
+                                            </div>
                                         </>
                                     )}
-                                </div>
+                                </>
                             )}
                         </div>
                     </div>

@@ -8,6 +8,7 @@ import { Box, Button, Spinner, Heading, Badge, IconButton } from "@chakra-ui/rea
 
 export default function Profile() {
     const [profile, setProfile] = useState(undefined)
+    const [isEditing, setIsEditing] = useState(false)
     
     const navigate = useNavigate()
 
@@ -29,6 +30,10 @@ export default function Profile() {
         } else {
             return <Badge variant='solid' colorScheme='blue'>Influencer</Badge>
         }
+    }
+
+    const handleEditButtonClicked = () => {
+        setIsEditing(!isEditing)
     }
 
     useEffect(() => {
@@ -64,14 +69,23 @@ export default function Profile() {
                                 aria-label='edit profile'
                                 size='md'
                                 icon={<FontAwesomeIcon icon={faPencil} />}
+                                onClick={handleEditButtonClicked}
                             />
-                        </div>  
+                        </div> 
                         <div className="info-box">
-                            <div><strong>Username:</strong> {profile.username}</div>
-                            <div><strong>First name:</strong> {profile.firstName}</div>
-                            <div><strong>Last name:</strong> {profile.lastName}</div>
-                            <div><strong>Email:</strong> {profile.email}</div>
-                            <div><strong>Role:</strong> {getUserRole(profile.role)}</div>
+                            {isEditing ? (
+                                <div>
+                                    Editing...
+                                </div>
+                            ) : (
+                                <div>
+                                    <div><strong>Username:</strong> {profile.username}</div>
+                                    <div><strong>First name:</strong> {profile.firstName}</div>
+                                    <div><strong>Last name:</strong> {profile.lastName}</div>
+                                    <div><strong>Email:</strong> {profile.email}</div>
+                                    <div><strong>Role:</strong> {getUserRole(profile.role)}</div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

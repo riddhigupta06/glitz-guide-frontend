@@ -19,7 +19,8 @@ export default function Login() {
     const handleLogin = async (values, actions) => {
         const res = await client.login(values)
         if (res['status'] === 200) {
-            sessionStorage.setItem("user", JSON.stringify(res['data']['username']))
+            sessionStorage.setItem("user", res.data.username)
+            sessionStorage.setItem("role", res.data.role)
         } else if (res['status'] === 404) {
             toast({
                 description: "The username doesn't exist or the password is incorrect. Please try again!",

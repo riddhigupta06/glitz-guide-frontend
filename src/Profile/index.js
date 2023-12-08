@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
+import { Box, Button, Spinner, Heading, Badge, IconButton, Tooltip, HStack, FormControl, FormLabel, RadioGroup, Radio, Stack, Input, Textarea } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCamera, faLink, faPencil, faInfo } from '@fortawesome/free-solid-svg-icons'
 import * as client from '../client';
 import "./index.css"
-import { Box, Button, Spinner, Heading, Badge, IconButton, Tooltip, HStack, FormControl, FormLabel, RadioGroup, Radio, Stack, Input, Textarea } from "@chakra-ui/react";
 
 export default function Profile() {
     const [profile, setProfile] = useState(undefined)

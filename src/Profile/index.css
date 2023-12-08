@@ -1,0 +1,83 @@
+.profile-box {
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: 400px;
+    background-color: #F2F2F2;
+    border-radius: 10px;
+}
+
+.left-column {
+    height: 100%;
+    padding: 20px;
+}
+
+.right-column {
+    width: 75%;
+    height: 100%;
+    padding: 20px;
+}
+
+.info-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: center;
+}
+
+.avatar-box {
+    width: 300px;
+    height: 300px;
+    border: 3px solid darkgrey;
+    border-radius:20; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout-button {
+    margin-top: 15px;
+    width: 300px;
+}
+
+@media (max-width: 850px) {
+    .profile-box {
+        display: block !important;
+        height: auto !important;
+        width: 95%;
+    }
+
+    .left-column {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .right-column {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: center;
+    }
+
+    .avatar-box {
+        width: 90%;
+    }
+
+    .logout-button {
+        width: 90%;
+    }
+}

@@ -1,19 +1,24 @@
-import { Box, Heading, Text, Spinner, Image, Badge, Stack, Button } from "@chakra-ui/react";
+import { Box, Heading, Text, Spinner, Image, Badge, Stack, Button, Divider } from "@chakra-ui/react";
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import * as client from "../client";
+import ProductReviews from "./ProductReviews";
 
 export default function Details() {
     const { detailID } = useParams()
     const [product, setProduct] = useState(undefined)
+    const username = sessionStorage.getItem("user")
 
     const fetchProduct = async () => {
         const productData = await client.details(detailID);
-        console.log(productData)
         setProduct(productData)
     }
 
     const colors = ['green', 'yellow', 'blue', 'purple', 'pink', 'red']
+
+    const isAuthenticated = () => {
+        return username !== null && username !== 'null' && username !== undefined
+    }
 
     useEffect(() => {
         fetchProduct()
@@ -26,6 +31,7 @@ export default function Details() {
                     Loading <Spinner marginLeft={5} />
                 </div>
             ) : (
+                <>
                 <Box width={'100%'}>
                     <Heading as={'h6'} size={'lg'}>{product.name}</Heading>
                     <Box marginBottom={1} style={{display:'flex', flexDirection:'row', gap:5}}>
@@ -97,6 +103,13 @@ export default function Details() {
                         </div>
                     </div>
                 </Box>
+                {isAuthenticated() && (
+                    <>
+                    <Divider />
+                    <ProductReviews productID={detailID} />
+                    </>
+                )}
+                </>
             )}
         </Box>
     )

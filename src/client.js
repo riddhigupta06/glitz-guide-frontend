@@ -9,6 +9,7 @@ export const BASE_API = process.env.REACT_APP_BASE;
 export const SEARCH_API = `${BASE_API}/search`;
 export const DETAILS_API = `${BASE_API}/product`;
 export const USERS_API = `${BASE_API}/users`;
+export const REVIEWS_API = `${BASE_API}/reviews`;
 
 // search endpoint
 export const search = async (pageIndex, queryString) => {
@@ -58,4 +59,16 @@ export const account = async () => {
 export const updateUser = async (account) => {
     const response = await request.put(`${USERS_API}/${account.username}`, account)
     return response.data
+}
+
+// gets all the reviews for the given product
+export const getProductReviews = async (productID) => {
+    const response = await request.get(`${REVIEWS_API}/product/${productID}`)
+    return response.data
+}
+
+// creates a review
+export const createReview = async (review) => {
+    const status = await request.post(`${REVIEWS_API}`, review)
+    return status
 }

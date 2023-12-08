@@ -61,7 +61,11 @@ export default function Profile() {
                     <div className="profile-box">
                         <div className="left-column">
                             <div className="avatar-box">
-                                <Avatar title="influencer-2" />
+                                {profile.avatar ? (
+                                    <Avatar title={profile.avatar} />
+                                ) : (
+                                    <Avatar title="missing" />
+                                )}
                             </div>
                             <div className="logout-button">
                                 <Button colorScheme="pink" width={"100%"} onClick={async () => await handleLogout()}>

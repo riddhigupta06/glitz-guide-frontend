@@ -84,6 +84,17 @@ export default function Profile() {
                                     <div><strong>Last name:</strong> {profile.lastName}</div>
                                     <div><strong>Email:</strong> {profile.email}</div>
                                     <div><strong>Role:</strong> {getUserRole(profile.role)}</div>
+                                    {profile.role === "influencer" && (
+                                        <>
+                                            <div><strong>Instagram:</strong> {profile.instagram}</div>
+                                            <div><strong>Website:</strong> {profile.website}</div>
+                                            <div><strong>Bio:</strong> {profile.bio}</div>
+                                            {/* <div>
+                                            <a href="#"><FontAwesomeIcon icon={} /></a>
+                                            <a href="#"><FontAwesomeIcon icon={} /></a>
+                                            </div> */}
+                                        </>
+                                    )}
                                 </div>
                             )}
                         </div>

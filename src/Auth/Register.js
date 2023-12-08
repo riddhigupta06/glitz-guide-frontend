@@ -10,9 +10,27 @@ import {
     Stack,
     RadioGroup,
     Radio,
-    useToast
+    Textarea,
+    useToast,
+    Tooltip,
+    IconButton
 } from '@chakra-ui/react'
 import * as client from '../client'
+import * as Yup from 'yup'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfo } from "@fortawesome/free-solid-svg-icons";
+
+const SignupSchema = Yup.object().shape({
+    firstName: Yup.string().required('Required'),
+    lastName: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    role: Yup.string().required('Required'),
+    username: Yup.string().required('Required'),
+    password: Yup.string().required('Required'),
+    instagram: Yup.string(),
+    website: Yup.string(),
+    bio: Yup.string().max(200)
+});
 
 export default function Register() {
 
@@ -39,8 +57,9 @@ export default function Register() {
     return (
         <div className="w-100">
             <Formik
-                initialValues={{ firstName: '', lastName:'', role: 'follower', email:'', username: '', password: '' }}
+                initialValues={{ firstName: '', lastName:'', role: 'follower', email:'', username: '', password: '', instagram: '', website: '', bio: '' }}
                 onSubmit={async (values, actions) => await handleRegister(values, actions)}
+                validationSchema={SignupSchema}
             >
             {(props) => (
                 <Form style={{display:'flex', flexDirection:'column', alignContent:'center', justifyContent:'center', gap:'20px'}}>
@@ -103,6 +122,39 @@ export default function Register() {
                             </FormControl>
                         )}
                     </Field>
+                    {props.values.role === "influencer" && (
+                        <>
+                            <Field name='instagram'>
+                                {({ field, form }) => (
+                                    <FormControl isInvalid={form.errors.instagram && form.touched.instagram}>
+                                        <HStack marginBottom={2} justifyContent={'flex-start'} alignItems={'flex-start'}>
+                                            <FormLabel>Instagram</FormLabel>
+                                            <Tooltip label='Your instagram handle' fontSize='md'>
+                                                <IconButton variant={'outline'} color="black" size={'xs'} icon={<FontAwesomeIcon icon={faInfo} />} />
+                                            </Tooltip>
+                                        </HStack>
+                                        <Input {...field} placeholder='adafinsta' />
+                                    </FormControl>
+                                )}
+                            </Field>
+                            <Field name='website'>
+                                {({ field, form }) => (
+                                    <FormControl isInvalid={form.errors.website && form.touched.website}>
+                                        <FormLabel>Website</FormLabel>
+                                        <Input {...field} placeholder='www.adabeauty.com' />
+                                    </FormControl>
+                                )}
+                            </Field>
+                            <Field name='bio'>
+                                {({ field, form }) => (
+                                    <FormControl isInvalid={form.errors.bio && form.touched.bio}>
+                                        <FormLabel>Bio</FormLabel>
+                                        <Textarea  {...field} placeholder='You short bio goes here!' />
+                                    </FormControl>
+                                )}
+                            </Field>
+                        </>
+                    )}
                     <Button
                         mt={4}
                         colorScheme='pink'

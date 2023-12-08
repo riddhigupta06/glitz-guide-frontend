@@ -25,11 +25,18 @@ export default function Root() {
                             Search
                         </div>
                     </NavLink>
-                    <NavLink className="nav-link" exact="true" to={`/blog`}>
+                    <NavLink className="nav-link" exact="true" to={`/connect`}>
                         <div onClick={() => setToggleMenuOpened(false)}>
-                            Blog Posts
+                            Connect
                         </div>
                     </NavLink>
+                    {sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'null' && sessionStorage.getItem('role') == 'influencer' && (
+                        <NavLink className="nav-link" exact="true" to={`/discuss`}>
+                            <div onClick={() => setToggleMenuOpened(false)}>
+                                Discuss
+                            </div>
+                        </NavLink>
+                    )}
                     {/* TODO: remove profile/userID link from nav once setup somewhere else */}
                     <NavLink className="nav-link" exact="true" to={`/profile/1`}>
                         <div onClick={() => setToggleMenuOpened(false)}>
@@ -66,7 +73,10 @@ export default function Root() {
                     <div className="collapse navbar-collapse ms-5" id="navbarNavAltMarkup">
                         <div className="navbar-nav gap-5 align-items-center w-100">
                             <NavLink className="nav-link" exact="true" to={`/search`}>Search</NavLink>
-                            <NavLink className="nav-link" exact="true" to={`/blog`}>Blog Posts</NavLink>
+                            <NavLink className="nav-link" exact="true" to={`/connect`}>Connect</NavLink>
+                            {sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'null' && sessionStorage.getItem('role') == "influencer" && (
+                                <NavLink className="nav-link" exact="true" to={`/discuss`}>Discuss</NavLink>
+                            )}
                             {/* TODO: remove profile/userID link from nav once setup somewhere else */}
                             <NavLink className="nav-link" exact="true" to={`/profile/1`}>Public Profile</NavLink>
                             {sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === 'null' ? (

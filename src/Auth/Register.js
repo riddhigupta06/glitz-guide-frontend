@@ -40,7 +40,8 @@ export default function Register() {
     const handleRegister = async (values, actions) => {
         const res = await client.register(values)
         if (res['status'] === 200) {
-            sessionStorage.setItem("user", JSON.stringify(res['data']['username']))
+            sessionStorage.setItem("user", res.data.username)
+            sessionStorage.setItem("role", res.data.username)
             actions.setSubmitting(false)
             navigate('/profile')
 

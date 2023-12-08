@@ -44,8 +44,12 @@ const router = createBrowserRouter([
         element: <Details />,
       },
       {
-        path: "blog",
-        element: <ProtectedRoute element={<div>Blog posts</div>} />,
+        path: "connect",
+        element: <ProtectedRoute element={<div>Connect to influencers</div>} />,
+      },
+      {
+        path: "discuss",
+        element: <ProtectedRoute influencerOnly element={<div>Discuss with other influencers</div>} />,
       }
     ]
   },

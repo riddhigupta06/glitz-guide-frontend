@@ -72,3 +72,15 @@ export const createReview = async (review) => {
     const status = await request.post(`${REVIEWS_API}`, review)
     return status
 }
+
+// deletes a review
+export const deleteReview = async (reviewID) => {
+    const status = await request.delete(`${REVIEWS_API}/${reviewID}`)
+    return status
+}
+
+// updates a review
+export const updateReview = async (reviewID, review) => {
+    const response = await request.put(`${REVIEWS_API}/${reviewID}`, review)
+    return response.data
+}

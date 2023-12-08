@@ -56,6 +56,6 @@ export const account = async () => {
 
 // update user's profile endpoint
 export const updateUser = async (account) => {
-    const response = await request.put(`${USERS_API}/${account.username}`)
+    const response = await request.put(`${USERS_API}/${account.username}`, account)
     return response.data
 }

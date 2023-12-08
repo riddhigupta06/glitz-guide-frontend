@@ -1,7 +1,7 @@
 .profile-box {
     display: flex;
     flex-direction: row;
-    width: 70%;
+    width: auto;
     background-color: #F2F2F2;
     border-radius: 10px;
 }

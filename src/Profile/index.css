@@ -1,9 +1,27 @@
+.main-box {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+}
+
 .profile-box {
     display: flex;
     flex-direction: row;
+    flex-grow: 1;
     width: auto;
     background-color: #F2F2F2;
     border-radius: 10px;
+}
+
+.reviews-box {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    background-color: #F2F2F2;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
 }
 
 .left-column {
@@ -49,7 +67,16 @@
     .profile-box {
         display: block !important;
         height: auto !important;
-        width: 95%;
+    }
+
+    .main-box {
+        display: block !important;
+        height: auto !important;
+    }
+
+    .reviews-box {
+        margin-top: 20px;
+        width: 100%;
     }
 
     .left-column {

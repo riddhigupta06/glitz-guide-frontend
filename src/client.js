@@ -84,3 +84,9 @@ export const updateReview = async (reviewID, review) => {
     const response = await request.put(`${REVIEWS_API}/${reviewID}`, review)
     return response.data
 }
+
+// gets all the reviews for the given user
+export const getUserReviews = async (username) => {
+    const response = await request.get(`${REVIEWS_API}/${username}`)
+    return response.data
+}

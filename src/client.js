@@ -8,6 +8,7 @@ export const BASE_API = process.env.REACT_APP_BASE;
 
 export const SEARCH_API = `${BASE_API}/search`;
 export const DETAILS_API = `${BASE_API}/product`;
+export const USERS_API = `${BASE_API}/users`;
 
 // search endpoint
 export const search = async (pageIndex, queryString) => {
@@ -49,6 +50,12 @@ export const logout = async () => {
 
 // account endpoint
 export const account = async () => {
-    const response = await request.post(`${BASE_API}/account`)
+    const response = await request.get(`${USERS_API}/account`)
+    return response.data
+}
+
+// update user's profile endpoint
+export const updateUser = async (account) => {
+    const response = await request.put(`${USERS_API}/${account.username}`)
     return response.data
 }

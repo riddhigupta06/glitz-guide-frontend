@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Box, Heading, Spinner, Badge, Tooltip, IconButton } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faCamera } from "@fortawesome/free-solid-svg-icons";
@@ -6,13 +7,21 @@ import "./index.css"
 import * as client from "../client";
 import Avatar from "../Avatar";
 
+
 export default function PublicProfile() {
     const [profile, setProfile] = useState(undefined)
+    const { userID } = useParams()
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchProfile = async () => {
-            const data = await client.publicProfile();
-            setProfile(data)
+            const res = await client.getPublicUserProfile(userID);
+            if (res.status === 200) {
+                setProfile(res.data)
+            } else {
+                navigate('/error')
+            }
         }
 
         fetchProfile()

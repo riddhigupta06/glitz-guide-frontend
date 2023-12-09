@@ -37,12 +37,6 @@ export default function Root() {
                             </div>
                         </NavLink>
                     )}
-                    {/* TODO: remove profile/userID link from nav once setup somewhere else */}
-                    <NavLink className="nav-link" exact="true" to={`/profile/1`}>
-                        <div onClick={() => setToggleMenuOpened(false)}>
-                            Public Profile
-                        </div>
-                    </NavLink>
                     {sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === 'null' ? (
                         <NavLink className="nav-link" exact="true" to={`/login`}>
                             <div onClick={() => setToggleMenuOpened(false)}>
@@ -77,8 +71,6 @@ export default function Root() {
                             {sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'null' && sessionStorage.getItem('role') === "influencer" && (
                                 <NavLink className="nav-link" exact="true" to={`/discuss`}>Discuss</NavLink>
                             )}
-                            {/* TODO: remove profile/userID link from nav once setup somewhere else */}
-                            <NavLink className="nav-link" exact="true" to={`/profile/1`}>Public Profile</NavLink>
                             {sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === 'null' ? (
                                 <NavLink className="nav-link ms-auto" exact="true" to={`/login`}>
                                     <Button variant='solid' colorScheme='pink'>

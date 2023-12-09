@@ -24,13 +24,13 @@ export default function Connect() {
                 {influencers.length === 0 ? (
                     <Text>Oops! There are no registered influencers for you to follow!</Text>
                 ) : (
-                    <VStack marginTop={10} alignItems={'flex-start'} justifyContent={'center'}>
+                    <div className="p-2 gap-3 row flex-row flex-wrap row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                         {influencers.map((influencer, idx) => {
                             return (
                                 <InlfuencerCard key={idx} influencer={influencer} />
                             )
                         })}
-                    </VStack>
+                    </div>
                 )}
             </Box>
         )

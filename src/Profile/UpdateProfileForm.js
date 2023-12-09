@@ -1,103 +1,46 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
-import {
-    FormControl,
-    FormLabel,
-    Input,
-    Button,
-    HStack,
-    Stack,
-    RadioGroup,
-    Radio,
-    Textarea,
-    useToast,
-    Tooltip,
-    IconButton,
-    Box
-} from '@chakra-ui/react'
-import * as client from '../client'
-import * as Yup from 'yup'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo } from "@fortawesome/free-solid-svg-icons";
-import Avatar from "../Avatar";
+import { Box, Button, IconButton, Tooltip, HStack, FormControl, FormLabel, RadioGroup, Radio, Stack, Input, Textarea } from "@chakra-ui/react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInfo } from '@fortawesome/free-solid-svg-icons'
+import Avatar from "../Avatar"
 
-const SignupSchema = Yup.object().shape({
-    firstName: Yup.string().required('Required'),
-    lastName: Yup.string().required('Required'),
-    email: Yup.string().email('Invalid email').required('Required'),
-    role: Yup.string().required('Required'),
-    username: Yup.string().required('Required'),
-    password: Yup.string().required('Required'),
-    instagram: Yup.string(),
-    website: Yup.string(),
-    bio: Yup.string().max(200),
-    avatar: Yup.string().required('Required')
-});
-
-export default function Register() {
-
-    const navigate = useNavigate()
-    const toast = useToast();
-
-    const handleRegister = async (values, actions) => {
-        const res = await client.register(values)
-        if (res['status'] === 200) {
-            sessionStorage.setItem("user", res.data.username)
-            sessionStorage.setItem("role", res.data.username)
-            actions.setSubmitting(false)
-            navigate('/profile')
-
-        } else if (res['status'] === 400) {
-            toast({
-                description: "The username already exists. Please choose a different one and try again!",
-                title: "Username already taken",
-                status: "info"
-            })
-            actions.setSubmitting(false)
-        }
-    }
-
+const UpdateProfileForm = ({ 
+    profile,
+    handleUpdate,
+    handleCancel 
+}) => {
     return (
-        <div className="w-100">
-            <Formik
-                initialValues={{ firstName: '', lastName:'', role: 'follower', email:'', username: '', password: '', instagram: '', website: '', bio: '', avatar: '' }}
-                onSubmit={async (values, actions) => await handleRegister(values, actions)}
-                validationSchema={SignupSchema}
-            >
-            {(props) => (
-                <Form style={{display:'flex', flexDirection:'column', alignContent:'center', justifyContent:'center', gap:'20px'}}>
-                    <HStack>
-                        <Field name='firstName'>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.firstName && form.touched.firstName}>
-                                    <FormLabel>First name</FormLabel>
-                                    <Input {...field} placeholder='Ada' />
-                                </FormControl>
-                            )}
-                        </Field>
-                        <Field name='lastName'>
-                            {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.lastName && form.touched.lastName}>
-                                    <FormLabel>Last name</FormLabel>
-                                    <Input {...field} placeholder='Lovelace' />
-                                </FormControl>
-                            )}
-                        </Field>
-                    </HStack>
+        <Formik
+            initialValues={{ avatar: profile.avatar, username: profile.username, role: profile.role, firstName: profile.firstName, lastName: profile.lastName, email: profile.email, password: profile.password, instagram: profile.instagram, website: profile.website, bio: profile.bio }}
+            onSubmit={async (values, actions) => await handleUpdate(values, actions)}
+        >
+        {(props) => (
+            <Form style={{display:'flex', flexDirection:'column', alignContent:'center', justifyContent:'center', gap:'20px', backgroundColor: "white", padding:20, borderRadius:10, width:'100%'}}>
+                <HStack>
+                    <Field name='firstName'>
+                        {({ field, form }) => (
+                            <FormControl isInvalid={form.errors.firstName && form.touched.firstName}>
+                                <FormLabel>First name</FormLabel>
+                                <Input {...field} placeholder='Ada' />
+                            </FormControl>
+                        )}
+                    </Field>
+                    <Field name='lastName'>
+                        {({ field, form }) => (
+                            <FormControl isInvalid={form.errors.lastName && form.touched.lastName}>
+                                <FormLabel>Last name</FormLabel>
+                                <Input {...field} placeholder='Lovelace' />
+                            </FormControl>
+                        )}
+                    </Field>
+                </HStack>
+                <HStack>
                     <Field name='email'>
                         {({ field, form }) => (
                             <FormControl isInvalid={form.errors.email && form.touched.email}>
                                 <FormLabel>Email</FormLabel>
                                 <Input {...field} placeholder='ada@gmail.com' />
-                            </FormControl>
-                        )}
-                    </Field>
-                    <Field name='username'>
-                        {({ field, form }) => (
-                            <FormControl isInvalid={form.errors.username && form.touched.username}>
-                                <FormLabel>Username</FormLabel>
-                                <Input {...field} placeholder='adalovelace' />
                             </FormControl>
                         )}
                     </Field>
@@ -109,9 +52,19 @@ export default function Register() {
                             </FormControl>
                         )}
                     </Field>
+                </HStack>
+                <HStack>
+                    <Field name='username'>
+                        {({ field, form }) => (
+                            <FormControl isInvalid={form.errors.username && form.touched.username} isDisabled={true}>
+                                <FormLabel>Username</FormLabel>
+                                <Input {...field} placeholder='adalovelace' />
+                            </FormControl>
+                        )}
+                    </Field>
                     <Field name='role'>
                         {({ field, form }) => (
-                            <FormControl id={'role'} isInvalid={!!form.errors['role'] && !!form.touched['role']}>
+                            <FormControl id={'role'} isInvalid={!!form.errors['role'] && !!form.touched['role']} isDisabled={true}>
                                 <FormLabel htmlFor={'role'}>I am a...</FormLabel>
                                 <RadioGroup {...field} id={'role'}>
                                     <Stack spacing={5} direction='row'>
@@ -126,7 +79,8 @@ export default function Register() {
                             </FormControl>
                         )}
                     </Field>
-                    <Field name='avatar'>
+                </HStack>
+                <Field name='avatar'>
                         {({ field, form }) => (
                             <FormControl id={'avatar'} isInvalid={!!form.errors['avatar'] && !!form.touched['avatar']}>
                                 <FormLabel htmlFor={'avatar'}>Avatar</FormLabel>
@@ -157,8 +111,9 @@ export default function Register() {
                             </FormControl>
                         )}
                     </Field>
-                    {props.values.role === "influencer" && (
-                        <>
+                {props.values.role === "influencer" && (
+                    <>
+                        <HStack>
                             <Field name='instagram'>
                                 {({ field, form }) => (
                                     <FormControl isInvalid={form.errors.instagram && form.touched.instagram}>
@@ -175,32 +130,50 @@ export default function Register() {
                             <Field name='website'>
                                 {({ field, form }) => (
                                     <FormControl isInvalid={form.errors.website && form.touched.website}>
-                                        <FormLabel>Website</FormLabel>
+                                        <HStack marginBottom={2} justifyContent={'flex-start'} alignItems={'flex-start'}>
+                                            <FormLabel>Website</FormLabel>
+                                            <Tooltip label='Your website' fontSize='md'>
+                                                <IconButton variant={'outline'} color="black" size={'xs'} icon={<FontAwesomeIcon icon={faInfo} />} />
+                                            </Tooltip>
+                                        </HStack>
                                         <Input {...field} placeholder='www.adabeauty.com' />
                                     </FormControl>
                                 )}
                             </Field>
-                            <Field name='bio'>
-                                {({ field, form }) => (
-                                    <FormControl isInvalid={form.errors.bio && form.touched.bio}>
-                                        <FormLabel>Bio</FormLabel>
-                                        <Textarea  {...field} placeholder='You short bio goes here!' />
-                                    </FormControl>
-                                )}
-                            </Field>
-                        </>
-                    )}
+                        </HStack>
+                        <Field name='bio'>
+                            {({ field, form }) => (
+                                <FormControl isInvalid={form.errors.bio && form.touched.bio}>
+                                    <FormLabel>Bio</FormLabel>
+                                    <Textarea  {...field} placeholder='You short bio goes here!' />
+                                </FormControl>
+                            )}
+                        </Field>
+                    </>
+                )}
+                <HStack width={'100%'}>
                     <Button
-                        mt={4}
+                        width={'100%'}
                         colorScheme='pink'
                         isLoading={props.isSubmitting}
                         type='submit'
                     >
-                        Register
+                        Update
                     </Button>
-                </Form>
-            )}
-            </Formik>
-        </div>
+                    <Button
+                        width={'100%'}
+                        variant={'outline'}
+                        colorScheme='pink'
+                        isLoading={props.isSubmitting}
+                        onClick={handleCancel}
+                    >
+                        Cancel
+                    </Button>
+                </HStack>
+            </Form>
+        )}
+        </Formik>
     )
 }
+
+export default UpdateProfileForm;

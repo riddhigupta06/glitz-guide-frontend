@@ -115,3 +115,20 @@ export const followInfluencer = async (influencerUsername) => {
     const status = await request.post(`${BASE_API}/follow/${influencerUsername}`)
     return status
 }
+
+// unfollows the given influencer
+export const unfollowInfluencer = async (influencerUsername) => {
+    const status = await request.post(`${BASE_API}/unfollow/${influencerUsername}`)
+    return status
+}
+
+// gets the people the given user is following
+export const getFollowing = async (username) => {
+    try {
+        const response = await request.get(`${BASE_API}/following/${username}`)
+        return {status: response.status, data: response.data}
+    } catch (err) {
+        console.log(err)
+        return {status: 400}
+    }
+}

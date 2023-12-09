@@ -1,13 +1,20 @@
 import React from "react";
 import { Box, HStack, Text, VStack, Heading, Card, CardBody, CardHeader, Flex, IconButton, Button } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare, faCamera, faLink, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare, faCamera, faLink, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import Avatar from "../Avatar";
 import { useNavigate, Link } from "react-router-dom";
 
-const InlfuencerCard = ({ influencer }) => {
+const InlfuencerCard = ({ 
+    influencer,
+    following,
+    handleFollowClicked,
+    handleUnfollowClicked
+}) => {
 
     const navigate = useNavigate();
+
+    const isFollowing = following.find((f) => f === influencer.username) !== undefined
 
     return (
         <Card width='md'>
@@ -35,9 +42,15 @@ const InlfuencerCard = ({ influencer }) => {
                 <VStack height={'100%'} justifyContent={'space-between'}>
                     <Text>{influencer.bio}</Text>
                     <VStack width={'100%'}>
-                        <Button width={'100%'} colorScheme="pink" variant='solid' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
-                            Follow
-                        </Button>
+                        {isFollowing ? (
+                            <Button onClick={() => handleUnfollowClicked(influencer.username)} width={'100%'} colorScheme="pink" variant='outline' leftIcon={<FontAwesomeIcon icon={faMinus} />}>
+                                Unfollow
+                            </Button>
+                        ) : (
+                            <Button onClick={() => handleFollowClicked(influencer.username)} width={'100%'} colorScheme="pink" variant='solid' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+                                Follow
+                            </Button>
+                        )}
                         <HStack width={'100%'}>
                             <Link style={{width:'50%'}} to={`https://www.instagram.com/${influencer.instagram}`} target="_blank">
                                 <IconButton

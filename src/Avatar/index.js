@@ -1,4 +1,4 @@
-import { Image, Box, } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import React from "react";
 
 export const influencerAvatars = ['influencer-1', 'influencer-2', 'influencer3', 'influencer-4']

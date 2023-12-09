@@ -43,6 +43,7 @@ const ProductReviews = ({ productID }) => {
 
     const handleEditReview = (review) => {
         setIsEditing(true)
+        console.log(review, review._id)
         setEditedReview(review)
     }
 
@@ -80,34 +81,37 @@ const ProductReviews = ({ productID }) => {
                             const isAuthor = review.username === username;
 
                             return (
-                                <HStack gap={5}>
+                                <HStack key={idx} gap={5}>
                                     <VStack>
                                         <Center width={'50px'}>
-                                            <Avatar title={'influencer-1'} />
+                                            <Avatar title={review.avatar} />
                                         </Center>
                                         <Text color={'darkblue'}><NavLink to={`/profile/${review.username}`}><strong>{review.username}</strong></NavLink></Text>
                                     </VStack>
-                                    <HStack flex={1} style={{minHeight:'100px', justifyContent:'space-between', alignItems:'flex-start', backgroundColor: "#F2F2F2", padding:10, borderRadius:10}}>
-                                        {isAuthor && isEditing && review._id === editedReview._id ? (
-                                            <Flex width={'100%'} direction={'column'} gap={5} marginTop={5}>
-                                                <Box flex={1}>
-                                                    <Textarea backgroundColor={'white'} resize={'vertical'} placeholder="Write your review here..." value={editedReview.review} onChange={(e) => setEditedReview({...editedReview, review:e.target.value})} />
-                                                </Box>
-                                                <HStack padding={1}>
-                                                    <Button colorScheme="pink" onClick={async () => await updateReview(editedReview)}>Update</Button>
-                                                    <Button colorScheme="pink" variant={'outline'} onClick={handleCancelUpdateReview}>Cancel</Button>
+                                    <VStack gap={0} width={'100%'} justifyContent={'flex-start'} alignItems={'flex-start'} padding={5} style={{minHeight:'100px', backgroundColor: "#F2F2F2", borderRadius:10 }}>
+                                        <Text margin={0} style={{ fontWeight:700 }}>{review.firstName} {review.lastName}</Text>
+                                        <HStack paddingTop={5} flex={1} style={{justifyContent:'space-between', alignItems:'flex-start', width:'100%'}}>
+                                            {isAuthor && isEditing && review._id === editedReview._id ? (
+                                                <Flex width={'100%'} direction={'column'} gap={5}>
+                                                    <Box flex={1}>
+                                                        <Textarea backgroundColor={'white'} resize={'vertical'} placeholder="Write your review here..." value={editedReview.review} onChange={(e) => setEditedReview({...editedReview, review:e.target.value})} />
+                                                    </Box>
+                                                    <HStack padding={1}>
+                                                        <Button colorScheme="pink" onClick={async () => await updateReview(editedReview)}>Update</Button>
+                                                        <Button colorScheme="pink" variant={'outline'} onClick={handleCancelUpdateReview}>Cancel</Button>
+                                                    </HStack>
+                                                </Flex>
+                                            ) : (
+                                                <Text paddingTop={5}>{review.review}</Text>
+                                            )}
+                                            {isAuthor && (
+                                                <HStack paddingTop={5}>
+                                                    <Button isDisabled={isEditing} colorScheme="yellow" onClick={() => handleEditReview(review)}>Edit</Button>
+                                                    <Button isDisabled={isEditing} colorScheme="red" onClick={async () => await handleDeleteReview(review._id)}>Delete</Button>
                                                 </HStack>
-                                            </Flex>
-                                        ) : (
-                                            <Text paddingTop={5} style={{paddingLeft:20}}>{review.review}</Text>
-                                        )}
-                                        {isAuthor && (
-                                            <HStack paddingTop={5}>
-                                                <Button isDisabled={isEditing} colorScheme="yellow" onClick={() => handleEditReview(review)}>Edit</Button>
-                                                <Button isDisabled={isEditing} colorScheme="red" onClick={async () => await handleDeleteReview(review._id)}>Delete</Button>
-                                            </HStack>
-                                        )}
-                                    </HStack>
+                                            )}
+                                        </HStack>
+                                    </VStack>
                                     
                                 </HStack>
                             )

@@ -17,6 +17,7 @@ import Profile from './Profile';
 import ProtectedRoute from './Router/ProtectedRoute';
 import AnonymousRoute from './Router/AnonymousRoute';
 import PublicProfile from './PublicProfile';
+import Connect from './Connect';
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "connect",
-        element: <ProtectedRoute element={<div>Connect to influencers</div>} />,
+        element: <ProtectedRoute element={<Connect />} />,
       },
       {
         path: "discuss",

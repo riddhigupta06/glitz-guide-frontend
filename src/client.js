@@ -10,6 +10,9 @@ export const SEARCH_API = `${BASE_API}/search`;
 export const DETAILS_API = `${BASE_API}/product`;
 export const USERS_API = `${BASE_API}/users`;
 export const REVIEWS_API = `${BASE_API}/reviews`;
+export const INFLUENCERS_API = `${BASE_API}/influencers`;
+
+
 
 // search endpoint
 export const search = async (pageIndex, queryString) => {
@@ -99,4 +102,16 @@ export const updateReview = async (reviewID, review) => {
 export const getUserReviews = async (username) => {
     const response = await request.get(`${REVIEWS_API}/${username}`)
     return response.data
+}
+
+// gets all influencers in the database
+export const getAllInfluencers = async () => {
+    const response = await request.get(`${INFLUENCERS_API}`)
+    return response.data
+}
+
+// follows the given influencer
+export const followInfluencer = async (influencerUsername) => {
+    const status = await request.post(`${BASE_API}/follow/${influencerUsername}`)
+    return status
 }

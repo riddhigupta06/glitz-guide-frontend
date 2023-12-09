@@ -1,9 +1,9 @@
 import { Image } from "@chakra-ui/react";
 import React from "react";
 
-export const influencerAvatars = ['influencer-1', 'influencer-2', 'influencer3', 'influencer-4']
-export const followerAvatars = ['follower-1', 'follower-2', 'follower-3', 'follower-4']
-export const avatarTitles = ['influencer-1', 'influencer-2', 'influencer3', 'influencer-4', 'follower-1', 'follower-2', 'follower-3', 'follower-4']
+export const INFLUENCER_AVATARS = ['influencer-1', 'influencer-2', 'influencer3', 'influencer-4']
+export const FOLLOWER_AVATARS = ['follower-1', 'follower-2', 'follower-3', 'follower-4']
+export const AVATARS = [...INFLUENCER_AVATARS, ...FOLLOWER_AVATARS]
 
 const Avatar = ({ title }) => {
     if (title === undefined) {

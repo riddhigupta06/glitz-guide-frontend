@@ -55,6 +55,12 @@ export const account = async () => {
     return response.data
 }
 
+// get personal public profile
+export const publicProfile = async () => {
+    const response = await request.get(`${USERS_API}/public`)
+    return response.data
+}
+
 // update user's profile endpoint
 export const updateUser = async (account) => {
     const response = await request.put(`${USERS_API}/${account.username}`, account)

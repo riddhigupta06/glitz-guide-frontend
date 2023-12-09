@@ -6,14 +6,12 @@ import "./index.css"
 import * as client from "../client";
 import Avatar from "../Avatar";
 
-const dummyAccount = {"_id":"6573527b86a0cbf636af6d89","username":"kendallj","password":"password","firstName":"Kendall","lastName":"Jenner","email":"kendall@gmail.com","instagram":"kendalljenner","website":"www.google.com","bio":"Hey guys! Kendall here.","role":"influencer"}
-
 export default function PublicProfile() {
     const [profile, setProfile] = useState(undefined)
 
     useEffect(() => {
         const fetchProfile = async () => {
-            // TODO - replace with correct endpoint
+            const data = await client.publicProfile();
             setProfile(dummyAccount)
         }
 

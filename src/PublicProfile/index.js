@@ -12,7 +12,7 @@ export default function PublicProfile() {
     useEffect(() => {
         const fetchProfile = async () => {
             const data = await client.publicProfile();
-            setProfile(dummyAccount)
+            setProfile(data)
         }
 
         fetchProfile()

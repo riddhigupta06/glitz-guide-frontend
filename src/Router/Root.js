@@ -20,6 +20,11 @@ export default function Root() {
                     </span>
                 </div>
                 <div className="navbar-nav p-5 gap-5 align-items-center w-100">
+                    <NavLink className="nav-link" exact="true" to={`/`}>
+                        <div onClick={() => setToggleMenuOpened(false)}>
+                            Home
+                        </div>
+                    </NavLink>
                     <NavLink className="nav-link" exact="true" to={`/search`}>
                         <div onClick={() => setToggleMenuOpened(false)}>
                             Search
@@ -66,6 +71,7 @@ export default function Root() {
                     </button>
                     <div className="collapse navbar-collapse ms-5" id="navbarNavAltMarkup">
                         <div className="navbar-nav gap-5 align-items-center w-100">
+                            <NavLink className="nav-link" exact="true" to={`/`}>Home</NavLink>
                             <NavLink className="nav-link" exact="true" to={`/search`}>Search</NavLink>
                             <NavLink className="nav-link" exact="true" to={`/connect`}>Connect</NavLink>
                             {sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'null' && sessionStorage.getItem('role') === "influencer" && (

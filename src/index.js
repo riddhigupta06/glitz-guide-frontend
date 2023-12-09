@@ -16,6 +16,7 @@ import Auth from './Auth';
 import Profile from './Profile';
 import ProtectedRoute from './Router/ProtectedRoute';
 import AnonymousRoute from './Router/AnonymousRoute';
+import PublicProfile from './PublicProfile';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "profile/:userID",
-        element: <ProtectedRoute element={<div>Public Profile</div>} />,
+        element: <PublicProfile />,
       },
       {
         path: "details/:detailID",

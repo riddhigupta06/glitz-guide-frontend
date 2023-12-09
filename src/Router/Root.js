@@ -51,7 +51,7 @@ export default function Root() {
                     ) : (
                         <NavLink className="nav-link" exact="true" to={`/profile`}>
                             <div onClick={() => setToggleMenuOpened(false)}>
-                                Profile
+                                {sessionStorage.getItem('user')}'s Profile
                             </div>
                         </NavLink>
                     )}
@@ -86,7 +86,7 @@ export default function Root() {
                             ) : (
                                 <NavLink className="nav-link ms-auto" exact="true" to={`/profile`}>
                                     <Button variant='solid' colorScheme='pink'>
-                                        Profile
+                                        {sessionStorage.getItem('user')}'s Profile
                                     </Button>
                                 </NavLink>
                             )}

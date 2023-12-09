@@ -132,3 +132,14 @@ export const getFollowing = async (username) => {
         return {status: 400}
     }
 }
+
+// gets the people that follow the given user 
+export const getFollowers = async (username) => {
+    try {
+        const response = await request.get(`${BASE_API}/followers/${username}`)
+        return {status: response.status, data: response.data}
+    } catch (err) {
+        console.log(err)
+        return {status: 400}
+    }
+}

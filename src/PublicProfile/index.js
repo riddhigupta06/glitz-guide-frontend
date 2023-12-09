@@ -56,6 +56,7 @@ export default function PublicProfile() {
                             {profile.role === "influencer" && (
                                 <>
                                     <div><strong>Bio:</strong> {profile.bio}</div>
+                                    <div><strong>Social media:</strong></div>
                                     <div style={{display: 'flex', flexDirection: 'row', gap:5}}>
                                         <a href={"https://www.instagram.com/"+profile.instagram} target="_blank">
                                             <Tooltip label="Instagram">

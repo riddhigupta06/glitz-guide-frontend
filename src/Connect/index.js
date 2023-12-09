@@ -19,7 +19,6 @@ export default function Connect() {
         const fetchFollowing = async () => {
             const res = await client.getFollowing(user);
             if (res.status === 200) {
-                console.log(res.data)
                 setFollowing(res.data)
             } else {
                 toast({
@@ -53,7 +52,7 @@ export default function Connect() {
                     <Text>Oops! There are no registered influencers for you to follow!</Text>
                 ) : (
                     <div className="p-2 gap-3 row flex-row flex-wrap row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-                        {influencers.map((influencer, idx) => {
+                        {influencers.filter((i) => i.username !== user).map((influencer, idx) => {
                             return (
                                 <InlfuencerCard key={idx} influencer={influencer} handleFollowClicked={handleFollowClicked} handleUnfollowClicked={handleUnfollowClicked} following={following} />
                             )

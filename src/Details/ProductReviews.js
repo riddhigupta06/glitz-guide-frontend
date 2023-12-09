@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Flex, Heading, Box, Button, Textarea, Text, HStack, VStack, Center, Divider } from "@chakra-ui/react";
 import * as client from "../client"
 import Avatar from "../Avatar";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const ProductReviews = ({ productID }) => {
     const [reviews, setReviews] = useState(undefined);

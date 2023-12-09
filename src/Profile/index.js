@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Box, Button, Spinner, Heading, Badge, IconButton, Tooltip } from "@chakra-ui/react";
+import { useNavigate, Link } from "react-router-dom";
+import { Box, Button, Spinner, Heading, Badge, IconButton, Tooltip, useToast, HStack } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCamera, faLink, faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faCamera, faLink, faPencil, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import Avatar from "../Avatar";
 import * as client from '../client';
 import "./index.css"
 import UserReviews from "./UserReviews";
 import UpdateProfileForm from "./UpdateProfileForm";
+import FollowingCard from './FollowingCard';
 
 export default function Profile() {
     const [profile, setProfile] = useState(undefined)
     const [isEditing, setIsEditing] = useState(false)
+    const [following, setFollowing] = useState([])
+    const [followers, setFollowers] = useState([])
+    const toast = useToast();
     
     const navigate = useNavigate()
-
-    const fetchAccount = async () => {
-        const data = await client.account();
-        setProfile(data)
-    }
 
     const handleLogout = async () => {
         const status = await client.logout()
@@ -45,6 +44,39 @@ export default function Profile() {
     }
 
     useEffect(() => {
+        const fetchFollowing = async (username) => {
+            const res = await client.getFollowing(username);
+            if (res.status === 200) {
+                setFollowing(res.data)
+            } else {
+                toast({
+                    title: 'Error in fetching your following',
+                    description: 'We ran into an error when trying to fetch your following! Please try again.',
+                    status: 'error',
+                })
+            }
+        }
+
+        const fetchFollowers = async (username) => {
+            const res = await client.getFollowers(username);
+            if (res.status === 200) {
+                setFollowers(res.data)
+            } else {
+                toast({
+                    title: 'Error in fetching your followers',
+                    description: 'We ran into an error when trying to fetch your followers! Please try again.',
+                    status: 'error',
+                })
+            }
+        }
+
+        const fetchAccount = async () => {
+            const data = await client.account();
+            fetchFollowing(data.username)
+            fetchFollowers(data.username)
+            setProfile(data)
+        }
+
         fetchAccount()
     }, [])
 
@@ -92,6 +124,7 @@ export default function Profile() {
                                         {profile.role === "influencer" && (
                                             <>
                                                 <div><strong>Bio:</strong> {profile.bio}</div>
+                                                <div><strong>Social media:</strong></div>
                                                 <div style={{display: 'flex', flexDirection: 'row', gap:5}}>
                                                     <a href={"https://www.instagram.com/"+profile.instagram} target="_blank">
                                                         <Tooltip label="Instagram">
@@ -125,12 +158,59 @@ export default function Profile() {
                             </div>
                         )}
                     </div>
-                    {profile.role === "influencer" && (
-                        <div className="reviews-box">
-                            <Heading as={'h6'} size={'md'}>My Reviews</Heading>
-                            <UserReviews username={profile.username} />
-                        </div>
-                    )}
+                    <div className="reviews-box">
+                        {profile.role === "influencer" && (
+                            <>
+                            <Box marginBottom={5}>
+                                <Heading as={'h6'} size={'md'}>My Reviews</Heading>
+                                <UserReviews username={profile.username} />
+                            </Box>
+                            <Box marginBottom={5}>
+                                <HStack width={'100%'} justifyContent={'space-between'}>
+                                    <Heading as={'h6'} size={'md'}>My followers</Heading>
+                                </HStack>
+                                {followers.length === 0 ? (
+                                    <div>
+                                        You don't have any followers right now!
+                                    </div>
+                                ) : (
+                                    <div className="p-2 gap-3 row flex-row flex-wrap row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                                        {followers.map((follower, idx) => {
+                                            return (
+                                                <FollowingCard key={idx} user={follower} />
+                                            )
+                                        })}
+                                    </div>
+                                )}
+                            </Box>
+                            </>
+                        )}
+                        <Box>
+                            <HStack width={'100%'} justifyContent={'space-between'}>
+                                <Heading as={'h6'} size={'md'}>My following</Heading>
+                                <IconButton
+                                    variant='ghost'
+                                    colorScheme='gray'
+                                    aria-label='connect'
+                                    onClick={() => navigate(`/connect`)}
+                                    icon={<FontAwesomeIcon icon={faArrowUpRightFromSquare} />}
+                                />
+                            </HStack>
+                            {following.length === 0 ? (
+                                <div>
+                                    You don't follow anyone right now. <Link to={'/connect'} style={{color:'purple', fontWeight:600}}>Connect with other influencers.</Link>
+                                </div>
+                            ) : (
+                                <div className="p-2 gap-3 row flex-row flex-wrap row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                                    {following.map((influencer, idx) => {
+                                        return (
+                                            <FollowingCard key={idx} user={influencer} />
+                                        )
+                                    })}
+                                </div>
+                            )}
+                        </Box>
+                    </div>
                 </div>
             )}
         </Box>

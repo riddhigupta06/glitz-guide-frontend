@@ -10,6 +10,9 @@ export const SEARCH_API = `${BASE_API}/search`;
 export const DETAILS_API = `${BASE_API}/product`;
 export const USERS_API = `${BASE_API}/users`;
 export const REVIEWS_API = `${BASE_API}/reviews`;
+export const INFLUENCERS_API = `${BASE_API}/influencers`;
+
+
 
 // search endpoint
 export const search = async (pageIndex, queryString) => {
@@ -99,4 +102,44 @@ export const updateReview = async (reviewID, review) => {
 export const getUserReviews = async (username) => {
     const response = await request.get(`${REVIEWS_API}/${username}`)
     return response.data
+}
+
+// gets all influencers in the database
+export const getAllInfluencers = async () => {
+    const response = await request.get(`${INFLUENCERS_API}`)
+    return response.data
+}
+
+// follows the given influencer
+export const followInfluencer = async (influencerUsername) => {
+    const status = await request.post(`${BASE_API}/follow/${influencerUsername}`)
+    return status
+}
+
+// unfollows the given influencer
+export const unfollowInfluencer = async (influencerUsername) => {
+    const status = await request.post(`${BASE_API}/unfollow/${influencerUsername}`)
+    return status
+}
+
+// gets the people the given user is following
+export const getFollowing = async (username) => {
+    try {
+        const response = await request.get(`${BASE_API}/following/${username}`)
+        return {status: response.status, data: response.data}
+    } catch (err) {
+        console.log(err)
+        return {status: 400}
+    }
+}
+
+// gets the people that follow the given user 
+export const getFollowers = async (username) => {
+    try {
+        const response = await request.get(`${BASE_API}/followers/${username}`)
+        return {status: response.status, data: response.data}
+    } catch (err) {
+        console.log(err)
+        return {status: 400}
+    }
 }

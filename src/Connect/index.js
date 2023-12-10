@@ -35,12 +35,12 @@ export default function Connect() {
     }, [])
     
     const handleFollowClicked = async (influencerUsername) => {
-        const status = await client.followInfluencer(influencerUsername);
+        await client.followInfluencer(influencerUsername);
         setFollowing([...following, influencerUsername])
     }
 
     const handleUnfollowClicked = async (influencerUsername) => {
-        const status = await client.unfollowInfluencer(influencerUsername);
+        await client.unfollowInfluencer(influencerUsername);
         setFollowing(following.filter((f) => f !== influencerUsername))
     }
 

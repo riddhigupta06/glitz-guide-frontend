@@ -30,14 +30,14 @@ const ProductReviews = ({ productID }) => {
     const addReview = async () => {
         if (newReview !== '') {
             const review = {pid: productID, username: username, review: newReview}
-            const res = await client.createReview(review)
+            await client.createReview(review)
             setReviews([review, ...reviews])
             setNewReview('')
         }
     }
 
     const handleDeleteReview = async (reviewID) => {
-        const res = await client.deleteReview(reviewID)
+        await client.deleteReview(reviewID)
         setReviews(reviews.filter(r => r._id !== reviewID))
     }
 
@@ -53,7 +53,7 @@ const ProductReviews = ({ productID }) => {
     } 
 
     const updateReview = async (review) => {
-        const res = await client.updateReview(review._id, review)
+        await client.updateReview(review._id, review)
         setReviews(reviews.map((r) => r._id === review._id ? review : r))
         setIsEditing(false)
         setEditedReview({})

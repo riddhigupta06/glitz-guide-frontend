@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Center, HStack, Heading, VStack } from "@chakra-ui/react";
 import Search from "../Search";
 import SearchSnippet from "../Search/SearchSnippet";
+import ConnectSnippet from "../Connect/ConnectSnippet";
 
 export default function Home() {
 
@@ -33,14 +34,11 @@ export default function Home() {
                 </VStack>
             </Center>
             <HStack>
-                <Box width={'50%'}>
+                <Box width={'50%'} alignSelf={'flex-start'}>
                     <SearchSnippet />
                 </Box>
-                <Box width={'50%'}>
-                    <VStack alignItems={'flex-start'}>
-                        <Heading as={'h6'} size={'lg'}>Connect with influencers</Heading>
-                        
-                    </VStack>
+                <Box width={'50%'} alignSelf={'flex-start'}>
+                    <ConnectSnippet />
                 </Box>
             </HStack>
             <Center height={'100px'} />

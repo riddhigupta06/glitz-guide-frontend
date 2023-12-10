@@ -14,7 +14,7 @@ const FollowingCard = ({ user }) => {
             <CardHeader>
                 <Flex spacing='4'>
                 <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                    <Box width={'100px'}>
+                    <Box width={'100px'} height={'100px'}>
                         <Avatar title={user.avatar} />
                     </Box>
                     <Box>

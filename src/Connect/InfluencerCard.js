@@ -21,7 +21,7 @@ const InlfuencerCard = ({
             <CardHeader>
                 <Flex spacing='4'>
                 <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                    <Box width={'100px'}>
+                    <Box width={'100px'} height={'100px'}>
                         <Avatar title={influencer.avatar} />
                     </Box>
                     <Box>

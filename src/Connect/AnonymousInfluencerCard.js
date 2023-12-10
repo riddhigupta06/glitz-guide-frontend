@@ -16,7 +16,7 @@ const AnonymousInlfuencerCard = ({
             <CardHeader>
                 <Flex spacing='4'>
                 <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                    <Box width={'80px'}>
+                    <Box width={'80px'} height={'80px'}>
                         <Avatar title={influencer.avatar} />
                     </Box>
                     <Box>

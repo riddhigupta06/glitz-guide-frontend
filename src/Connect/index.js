@@ -32,6 +32,7 @@ export default function Connect() {
         fetchInfluencers();
         fetchFollowing()
 
+    // eslint-disable-next-line
     }, [])
     
     const handleFollowClicked = async (influencerUsername) => {

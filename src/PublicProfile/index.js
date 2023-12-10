@@ -26,6 +26,7 @@ export default function PublicProfile() {
 
         fetchProfile()
 
+    // eslint-disable-next-line
     }, [])
 
     const getUserRole = (role) => {

@@ -21,6 +21,8 @@ const ProductReviews = ({ productID }) => {
         }
 
         fetchReviews()
+    
+    // eslint-disable-next-line
     }, [])
 
     const isInfluencer = () => {

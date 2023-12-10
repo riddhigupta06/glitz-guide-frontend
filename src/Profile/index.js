@@ -20,7 +20,7 @@ export default function Profile() {
     const navigate = useNavigate()
 
     const handleLogout = async () => {
-        const status = await client.logout()
+        await client.logout()
         sessionStorage.clear()
         navigate('/login')
     }
@@ -78,6 +78,8 @@ export default function Profile() {
         }
 
         fetchAccount()
+    
+    // eslint-disable-next-line
     }, [])
 
     return (

@@ -1,10 +1,39 @@
 import React from "react";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Center, Heading, VStack } from "@chakra-ui/react";
+import Search from "../Search";
+import SearchSnippet from "../Search/SearchSnippet";
 
 export default function Home() {
+
+    const user = sessionStorage.getItem("user")
+    const role = sessionStorage.getItem("role")
+
+    const getHeading = () => {
+        if (user === null || user === 'null' || user === undefined) {
+            return 'Glitz Guide 💄'
+        } else {
+            return  `Welcome ${user}!`
+        }
+    }
+
+    const getSubheading = () => {
+        if (user === null || user === 'null' || user === undefined) {
+            return 'Your beauty journey begins here.'
+        } else {
+            return  ''
+        }
+    }
+
     return (
         <Box>
-            <Heading as={'h6'} size={'lg'}>Welcome!</Heading>
+            <Center marginBottom={7} height={'400px'} width={'100%'} backgroundImage={require('./images/makeupbg.png')} backgroundRepeat={'repeat'} backgroundColor={'pink'}>
+                <VStack  padding={10} backgroundColor={'black'}>
+                <Heading color={'#D58AB0'} as={'h1'} size={'4xl'}>{getHeading()}</Heading>
+                    <Heading color={'#D58AB0'} as={'h6'} size={'xl'} fontWeight={300}>{getSubheading()}</Heading>
+                </VStack>
+            </Center>
+            <SearchSnippet />
+            <Center height={'100px'} />
         </Box>
     )
 }

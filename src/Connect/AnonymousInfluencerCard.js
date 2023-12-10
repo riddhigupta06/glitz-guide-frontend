@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardHeader, Flex, Box, IconButton, CardBody, VStack, Text, Heading } from "@chakra-ui/react";
+import { Card, CardHeader, Flex, Box, IconButton, Text, Heading } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import Avatar from "../Avatar";

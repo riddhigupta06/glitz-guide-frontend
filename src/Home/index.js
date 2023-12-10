@@ -1,13 +1,11 @@
 import React from "react";
 import { Box, Center, HStack, Heading, VStack } from "@chakra-ui/react";
-import Search from "../Search";
 import SearchSnippet from "../Search/SearchSnippet";
 import ConnectSnippet from "../Connect/ConnectSnippet";
 
 export default function Home() {
 
     const user = sessionStorage.getItem("user")
-    const role = sessionStorage.getItem("role")
 
     const getHeading = () => {
         if (user === null || user === 'null' || user === undefined) {

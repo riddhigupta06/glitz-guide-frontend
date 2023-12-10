@@ -13,7 +13,7 @@ const SearchSnippet = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             const data = await client.search(1, '')
-            setProducts(data.data.slice(0, 4))
+            setProducts(data.data.slice(0, 2))
         }
 
         fetchProducts()

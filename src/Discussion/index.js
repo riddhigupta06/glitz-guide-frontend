@@ -27,7 +27,7 @@ export default function Discussion() {
       const post = { username: username, title: newTitle, body: newPost };
       const res = await client.writePost(username, post);
       const fetched = await client.getPosts();
-      setPosts(fetched);
+      setPosts(fetched.data);
       setNewPost("");
     }
   };

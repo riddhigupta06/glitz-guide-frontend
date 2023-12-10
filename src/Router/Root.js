@@ -20,6 +20,11 @@ export default function Root() {
                     </span>
                 </div>
                 <div className="navbar-nav p-5 gap-5 align-items-center w-100">
+                    <NavLink className="nav-link" exact="true" to={`/`}>
+                        <div onClick={() => setToggleMenuOpened(false)}>
+                            Home
+                        </div>
+                    </NavLink>
                     <NavLink className="nav-link" exact="true" to={`/search`}>
                         <div onClick={() => setToggleMenuOpened(false)}>
                             Search
@@ -37,12 +42,6 @@ export default function Root() {
                             </div>
                         </NavLink>
                     )}
-                    {/* TODO: remove profile/userID link from nav once setup somewhere else */}
-                    <NavLink className="nav-link" exact="true" to={`/profile/1`}>
-                        <div onClick={() => setToggleMenuOpened(false)}>
-                            Public Profile
-                        </div>
-                    </NavLink>
                     {sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === 'null' ? (
                         <NavLink className="nav-link" exact="true" to={`/login`}>
                             <div onClick={() => setToggleMenuOpened(false)}>
@@ -52,7 +51,7 @@ export default function Root() {
                     ) : (
                         <NavLink className="nav-link" exact="true" to={`/profile`}>
                             <div onClick={() => setToggleMenuOpened(false)}>
-                                Profile
+                                {sessionStorage.getItem('user')}'s Profile
                             </div>
                         </NavLink>
                     )}
@@ -72,13 +71,12 @@ export default function Root() {
                     </button>
                     <div className="collapse navbar-collapse ms-5" id="navbarNavAltMarkup">
                         <div className="navbar-nav gap-5 align-items-center w-100">
+                            <NavLink className="nav-link" exact="true" to={`/`}>Home</NavLink>
                             <NavLink className="nav-link" exact="true" to={`/search`}>Search</NavLink>
                             <NavLink className="nav-link" exact="true" to={`/connect`}>Connect</NavLink>
                             {sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'null' && sessionStorage.getItem('role') === "influencer" && (
                                 <NavLink className="nav-link" exact="true" to={`/discuss`}>Discuss</NavLink>
                             )}
-                            {/* TODO: remove profile/userID link from nav once setup somewhere else */}
-                            <NavLink className="nav-link" exact="true" to={`/profile/1`}>Public Profile</NavLink>
                             {sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === 'null' ? (
                                 <NavLink className="nav-link ms-auto" exact="true" to={`/login`}>
                                     <Button variant='solid' colorScheme='pink'>
@@ -88,7 +86,7 @@ export default function Root() {
                             ) : (
                                 <NavLink className="nav-link ms-auto" exact="true" to={`/profile`}>
                                     <Button variant='solid' colorScheme='pink'>
-                                        Profile
+                                        {sessionStorage.getItem('user')}'s Profile
                                     </Button>
                                 </NavLink>
                             )}

@@ -59,7 +59,7 @@ const SearchSnippet = () => {
                     </div>
                 </div>
     
-                <Button width={'300px'} variant={'outline'} colorScheme="pink" onClick={() => navigate('/search')}>View More</Button>
+                <Button width={'70%'} variant={'outline'} colorScheme="pink" onClick={() => navigate('/search')}>View More</Button>
             </VStack>
         )
     }

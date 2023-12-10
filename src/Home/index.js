@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Center, Heading, VStack } from "@chakra-ui/react";
+import { Box, Center, HStack, Heading, VStack } from "@chakra-ui/react";
 import Search from "../Search";
 import SearchSnippet from "../Search/SearchSnippet";
 
@@ -32,7 +32,17 @@ export default function Home() {
                     <Heading color={'#D58AB0'} as={'h6'} size={'xl'} fontWeight={300}>{getSubheading()}</Heading>
                 </VStack>
             </Center>
-            <SearchSnippet />
+            <HStack>
+                <Box width={'50%'}>
+                    <SearchSnippet />
+                </Box>
+                <Box width={'50%'}>
+                    <VStack alignItems={'flex-start'}>
+                        <Heading as={'h6'} size={'lg'}>Connect with influencers</Heading>
+                        
+                    </VStack>
+                </Box>
+            </HStack>
             <Center height={'100px'} />
         </Box>
     )

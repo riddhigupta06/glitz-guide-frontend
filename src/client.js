@@ -10,6 +10,7 @@ export const SEARCH_API = `${BASE_API}/search`;
 export const DETAILS_API = `${BASE_API}/product`;
 export const USERS_API = `${BASE_API}/users`;
 export const REVIEWS_API = `${BASE_API}/reviews`;
+export const DISCUSSION_API = `${BASE_API}/discussion`;
 export const INFLUENCERS_API = `${BASE_API}/influencers`;
 
 
@@ -142,4 +143,27 @@ export const getFollowers = async (username) => {
         console.log(err)
         return {status: 400}
     }
+}
+
+//creates a new discussion post
+export const writePost = async (username, post) => {
+    const status = await request.post(`${DISCUSSION_API}/new/${username}`, post);
+    return status
+}
+
+//gets all discussion posts
+export const getPosts = async () => {
+    const status = await request.get(`${DISCUSSION_API}`);
+    return status;
+}
+
+//updates discussion post
+export const updatePost = async (id, post) => {
+    const status = await request.put(`${DISCUSSION_API}/${id}`, post);
+    return status;  
+}
+
+export const deletePost = async (id) => {
+    const status = await request.delete(`${DISCUSSION_API}/${id}`);
+    return status;
 }

@@ -5,7 +5,7 @@ import Avatar from "../Avatar";
 import { NavLink } from "react-router-dom";
 
 const ProductReviews = ({ productID }) => {
-    const [reviews, setReviews] = useState(undefined);
+    const [reviews, setReviews] = useState([]);
     const [newReview, setNewReview] = useState('');
 
     const [isEditing, setIsEditing] = useState(false)

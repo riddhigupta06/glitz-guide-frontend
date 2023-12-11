@@ -18,6 +18,7 @@ import ProtectedRoute from './Router/ProtectedRoute';
 import AnonymousRoute from './Router/AnonymousRoute';
 import PublicProfile from './PublicProfile';
 import Connect from './Connect';
+import Discussion from './Discussion';
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: "discuss",
-        element: <ProtectedRoute influencerOnly element={<div>Discuss with other influencers</div>} />,
+        element: <ProtectedRoute influencerOnly element={<Discussion/>} />,
       }
     ]
   },

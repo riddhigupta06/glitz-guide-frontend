@@ -7,16 +7,27 @@ import { Navigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { IconButton } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrashCan,
+  faReply,
+  faPencil,
+} from "@fortawesome/free-solid-svg-icons";
 import { Center, Box, Heading, HStack } from "@chakra-ui/react";
 import EditDiscussion from "./EditDiscussion";
-const DiscussionCard = ({ post }) => {
+const DiscussionCard = ({ post, handleRefresh }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [currPost, setPost] = useState(post);
   const handleEditButtonClicked = () => {
     setIsEditing(!isEditing);
   };
   const username = sessionStorage.getItem("user");
+  const handleDelete = async () => {
+    const res = await client.deletePost(post._id);
+    handleRefresh();
+  }
+  const handleCancel = () => {
+    setIsEditing(false);
+  }
   const handleUpdate = async (values, actions) => {
     console.log(values);
     const p = {
@@ -66,23 +77,38 @@ const DiscussionCard = ({ post }) => {
           </>
         ) : (
           <div style={{ width: "80%" }}>
-            <EditDiscussion post={currPost} handleUpdate={handleUpdate} />
+            <EditDiscussion post={currPost} handleCancel = {handleCancel} handleUpdate={handleUpdate} />
           </div>
         )}
-        
+
         {username == post.username ? (
-        <Box>
-          <IconButton
-            colorScheme="black"
-            variant={"outline"}
-            aria-label="edit profile"
-            size="md"
-            icon={<FontAwesomeIcon icon={faPencil} />}
-            onClick={handleEditButtonClicked}
-            style={{ position: "absolute", top: 10, right: 10 }}
-          />
-        </Box>
-        ) : (<></>)}
+          <HStack gap={5}>
+            <Box>
+              <IconButton
+                colorScheme="red"
+                variant={"outline"}
+                aria-label="edit profile"
+                size="md"
+                icon={<FontAwesomeIcon icon={faTrashCan} />}
+                onClick={handleDelete}
+                style={{ position: "absolute", top: 10, right: 70 }}
+              />
+            </Box>
+            <Box>
+              <IconButton
+                colorScheme="black"
+                variant={"outline"}
+                aria-label="edit profile"
+                size="md"
+                icon={<FontAwesomeIcon icon={faPencil} />}
+                onClick={handleEditButtonClicked}
+                style={{ position: "absolute", top: 10, right: 10 }}
+              />
+            </Box>
+          </HStack>
+        ) : (
+          <></>
+        )}
       </HStack>
     </Card>
   );

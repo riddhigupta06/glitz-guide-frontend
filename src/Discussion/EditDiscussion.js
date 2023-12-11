@@ -7,7 +7,8 @@ import {
   Input,
   Button
 } from "@chakra-ui/react";
-const EditDiscussion = ({ post, handleUpdate }) => {
+const EditDiscussion = ({ post, handleUpdate, handleCancel }) => {
+    
   return (
     <Formik initialValues={{ title: post.title, body: post.body }}
     onSubmit={async (values, actions) =>
@@ -51,6 +52,14 @@ const EditDiscussion = ({ post, handleUpdate }) => {
               </FormControl>
             )}
           </Field>
+          <Button
+            width={"100%"}
+            colorScheme="red"
+            onClick={handleCancel}
+            type="cancel"
+          >
+            Cancel
+          </Button>
           <Button
             width={"100%"}
             colorScheme="pink"

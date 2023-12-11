@@ -21,6 +21,11 @@ export default function Discussion() {
   const [posts, setPosts] = useState([]);
 
   const username = sessionStorage.getItem("user");
+  const handleRefresh = async () => {
+    const fetched = await client.getPosts();
+    setPosts(fetched.data);
+  };
+
 
   const addPost = async () => {
     if (newPost !== "") {
@@ -29,6 +34,7 @@ export default function Discussion() {
       const fetched = await client.getPosts();
       setPosts(fetched.data);
       setNewPost("");
+      setNewTitle("");
     }
   };
   useEffect(() => {
@@ -69,7 +75,9 @@ export default function Discussion() {
         {posts.length === 0 ? (
           <Text>Oops! There are no discussion posts right now!</Text>
         ) : (
-          posts.map((post) => <DiscussionCard post={post} />)
+          posts.map((post) => (
+            <DiscussionCard post={post} handleRefresh={handleRefresh} />
+          ))
         )}
       </div>
     </Box>

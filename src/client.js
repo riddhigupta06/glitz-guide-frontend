@@ -162,3 +162,8 @@ export const updatePost = async (id, post) => {
     const status = await request.put(`${DISCUSSION_API}/${id}`, post);
     return status;  
 }
+
+export const deletePost = async (id) => {
+    const status = await request.delete(`${DISCUSSION_API}/${id}`);
+    return status;
+}

@@ -26,6 +26,7 @@ export default function PublicProfile() {
 
         fetchProfile()
 
+    // eslint-disable-next-line
     }, [])
 
     const getUserRole = (role) => {
@@ -58,7 +59,7 @@ export default function PublicProfile() {
                                     <div><strong>Bio:</strong> {profile.bio}</div>
                                     <div><strong>Social media:</strong></div>
                                     <div style={{display: 'flex', flexDirection: 'row', gap:5}}>
-                                        <a href={"https://www.instagram.com/"+profile.instagram} target="_blank">
+                                        <a href={"https://www.instagram.com/"+profile.instagram} rel="noreferrer" target="_blank">
                                             <Tooltip label="Instagram">
                                                 <IconButton
                                                     colorScheme='pink'
@@ -68,7 +69,7 @@ export default function PublicProfile() {
                                                 />
                                             </Tooltip>
                                         </a>
-                                        <a href={"https://" + profile.website} target="_blank">
+                                        <a href={"https://" + profile.website} rel="noreferrer" target="_blank">
                                             <Tooltip label="Website">
                                                 <IconButton
                                                     colorScheme='pink'

@@ -115,7 +115,7 @@ export default function Search() {
             ) : (
                 <div className="w-100 d-flex flex-column align-content-center">
                     <div className="p-2 gap-3 row flex-row flex-wrap row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-                        {products.map((product, idx) => <ProductCard key={idx} id={product.id} name={product.name} price={product.price} image_link={product.image} brand={product.brand} product_type={product.type} />)}
+                        {products.map((product, idx) => <ProductCard size='sm' key={idx} id={product.id} name={product.name} price={product.price} image_link={product.image} brand={product.brand} product_type={product.type} />)}
                     </div>
                     {products.length < totalProducts && (
                         <div className="d-flex flex-row justify-content-center align-content-center" style={{paddingTop:30}}>

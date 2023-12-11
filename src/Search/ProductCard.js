@@ -3,6 +3,7 @@ import { Card, CardBody, Stack, Text, Image, Heading, Button, CardFooter } from 
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({
+    size,
     id,
     brand,
     name,
@@ -18,7 +19,7 @@ const ProductCard = ({
     }
 
     return (
-        <Card maxW='sm' width={325}>
+        <Card maxW={size} width={325}>
             <CardBody padding={1}>
                 <Image
                     src={`https:${image_link}`}

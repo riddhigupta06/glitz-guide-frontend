@@ -20,7 +20,7 @@ export default function Profile() {
     const navigate = useNavigate()
 
     const handleLogout = async () => {
-        const status = await client.logout()
+        await client.logout()
         sessionStorage.clear()
         navigate('/login')
     }
@@ -78,6 +78,8 @@ export default function Profile() {
         }
 
         fetchAccount()
+    
+    // eslint-disable-next-line
     }, [])
 
     return (
@@ -126,7 +128,7 @@ export default function Profile() {
                                                 <div><strong>Bio:</strong> {profile.bio}</div>
                                                 <div><strong>Social media:</strong></div>
                                                 <div style={{display: 'flex', flexDirection: 'row', gap:5}}>
-                                                    <a href={"https://www.instagram.com/"+profile.instagram} target="_blank">
+                                                    <a href={"https://www.instagram.com/"+profile.instagram} rel="noreferrer" target="_blank">
                                                         <Tooltip label="Instagram">
                                                             <IconButton
                                                                 colorScheme='pink'
@@ -136,7 +138,7 @@ export default function Profile() {
                                                             />
                                                         </Tooltip>
                                                     </a>
-                                                    <a href={"https://" + profile.website} target="_blank">
+                                                    <a href={"https://" + profile.website} rel="noreferrer" target="_blank">
                                                         <Tooltip label="Website">
                                                             <IconButton
                                                                 colorScheme='pink'

@@ -3,6 +3,7 @@ import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@chakra-ui/react";
+import Home from "../Home";
 
 export default function Root() {
 
@@ -98,9 +99,7 @@ export default function Root() {
             {toggleMenuOpened && renderToggleMenu()}
             <div id="detail">
                 {location.pathname === "/" ? (
-                    <div>
-                        Welcome to Glitz Guide!
-                    </div>
+                    <Home />
                 ) : (
                     <Outlet />
                 )}

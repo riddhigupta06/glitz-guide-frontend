@@ -133,22 +133,22 @@ export default function Register() {
                                 <RadioGroup {...field} id={'avatar'}>
                                     <Stack spacing={5} direction='row'>
                                         <Radio {...field} colorScheme='purple' value={props.values.role+'-1'}>
-                                            <Box width={100}>
+                                            <Box width={100} height={100}>
                                                 <Avatar title={`${props.values.role}-1`} />
                                             </Box>
                                         </Radio>
                                         <Radio {...field} colorScheme='purple' value={props.values.role+'-2'}>
-                                            <Box width={100}>
+                                            <Box width={100} height={100}>
                                                 <Avatar title={`${props.values.role}-2`} />
                                             </Box>
                                         </Radio>
                                         <Radio {...field} colorScheme='purple' value={props.values.role+'-3'}>
-                                            <Box width={100}>
+                                            <Box width={100} height={100}>
                                                 <Avatar title={`${props.values.role}-3`} />
                                             </Box>
                                         </Radio>
                                         <Radio {...field} colorScheme='purple' value={props.values.role+'-4'}>
-                                            <Box width={100}>
+                                            <Box width={100} height={100}>
                                                 <Avatar title={`${props.values.role}-4`} />
                                             </Box>
                                         </Radio>

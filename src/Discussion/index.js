@@ -19,6 +19,7 @@ export default function Discussion() {
   const [newTitle, setNewTitle] = useState("");
   const [newPost, setNewPost] = useState("");
   const [posts, setPosts] = useState([]);
+  const [replies, setReplies] = useState([]);
 
   const username = sessionStorage.getItem("user");
   const handleRefresh = async () => {

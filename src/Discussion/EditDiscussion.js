@@ -52,22 +52,25 @@ const EditDiscussion = ({ post, handleUpdate, handleCancel }) => {
               </FormControl>
             )}
           </Field>
-          <Button
-            width={"100%"}
-            colorScheme="red"
-            onClick={handleCancel}
-            type="cancel"
-          >
-            Cancel
-          </Button>
-          <Button
-            width={"100%"}
-            colorScheme="pink"
-            isLoading={props.isSubmitting}
-            type="submit"
-          >
-            Update
-          </Button>
+          <HStack>
+            <Button
+              width={"50%"}
+              colorScheme="pink"
+              isLoading={props.isSubmitting}
+              type="submit"
+            >
+              Update
+            </Button>
+            <Button
+              width={"50%"}
+              colorScheme="red"
+              variant={'outline'}
+              onClick={handleCancel}
+              type="cancel"
+            >
+              Cancel
+            </Button>
+          </HStack>
         </Form>
       )}
     </Formik>

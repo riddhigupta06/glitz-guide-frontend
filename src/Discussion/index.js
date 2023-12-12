@@ -18,7 +18,6 @@ export default function Discussion() {
   const [newTitle, setNewTitle] = useState("");
   const [newPost, setNewPost] = useState("");
   const [posts, setPosts] = useState([]);
-  const [replies, setReplies] = useState([]);
 
   const username = sessionStorage.getItem("user");
   const handleRefresh = async () => {
@@ -76,17 +75,17 @@ export default function Discussion() {
         </Button>
       </Box>
       </VStack>
-      <Divider marginTop={10} marginBottom={10} />
+      <Divider marginTop={5} marginBottom={10} />
       <Heading as={"h6"} size={"md"}>Read other discussions...</Heading>
-      <div style={{marginTop:30}}>
-        {posts.length === 0 ? (
-          <Text>Oops! There are no discussion posts right now!</Text>
-        ) : (
-          posts.map((post) => (
-            <DiscussionCard post={post} handleRefresh={handleRefresh} />
-          ))
-        )}
-      </div>
+        <VStack style={{marginTop:30}}>
+          {posts.length === 0 ? (
+            <Text>Oops! There are no discussion posts right now!</Text>
+          ) : (
+            posts.map((post) => (
+              <DiscussionCard post={post} handleRefresh={handleRefresh} />
+            ))
+          )}
+        </VStack>
     </Box>
   );
 }

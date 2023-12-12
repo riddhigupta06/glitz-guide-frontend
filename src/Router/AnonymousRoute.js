@@ -1,12 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function AnonymousRoute({ element }) {
     const user = sessionStorage.getItem('user');
     const navigate = useNavigate()
 
-    if (user === undefined || user === null || user === 'null') {
-        navigate('/login')
-    } else {
-        navigate('/profile')
-    }
+    return user === undefined || user === null || user === 'null' ? element : <Navigate to={'/profile'} replace />;
 }

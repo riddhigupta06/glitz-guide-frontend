@@ -158,10 +158,8 @@ const DiscussionCard = ({ post, handleRefresh }) => {
               <Text marginLeft={5} color={"#D53F8C"}>
                 <NavLink to={`/profile/${post.username}`}>
                   <HStack>
-                    <strong>{reply.firstName}</strong>
-                    <strong>
-                      {reply.lastName} : {reply.reply}{" "}
-                    </strong>
+                    <Text><strong>{reply.firstName} {reply.lastName} </strong> : {reply.reply}{" "}
+                    </Text>
                   </HStack>
                 </NavLink>
               </Text>

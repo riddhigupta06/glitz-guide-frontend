@@ -12,6 +12,7 @@ export const USERS_API = `${BASE_API}/users`;
 export const REVIEWS_API = `${BASE_API}/reviews`;
 export const DISCUSSION_API = `${BASE_API}/discussion`;
 export const INFLUENCERS_API = `${BASE_API}/influencers`;
+export const REPLY_API = `${BASE_API}/replies`;
 
 
 
@@ -165,5 +166,20 @@ export const updatePost = async (id, post) => {
 
 export const deletePost = async (id) => {
     const status = await request.delete(`${DISCUSSION_API}/${id}`);
+    return status;
+}
+
+export const writeReply = async (id, review) => {
+    const status = await request.post(`${REPLY_API}/${id}`, review);
+    return status;
+}
+
+export const getReplies = async (did) => {
+    const status = await request.get(`${REPLY_API}/${did}`);
+    return status;
+}
+
+export const deleteReply = async (id) => {
+    const status = await request.delete(`${REPLY_API}/${id}`);
     return status;
 }

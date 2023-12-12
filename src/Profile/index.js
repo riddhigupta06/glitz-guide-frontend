@@ -47,6 +47,7 @@ export default function Profile() {
         const fetchFollowing = async (username) => {
             const res = await client.getFollowing(username);
             if (res.status === 200) {
+                console.log(res.data)
                 setFollowing(res.data)
             } else {
                 toast({

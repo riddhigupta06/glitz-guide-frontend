@@ -14,7 +14,7 @@ const InlfuencerCard = ({
 
     const navigate = useNavigate();
 
-    const isFollowing = following.find((f) => f === influencer.username) !== undefined
+    const isFollowing = following.find((f) => f.username === influencer.username) !== undefined
 
     return (
         <Card width='md'>

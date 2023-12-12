@@ -19,6 +19,7 @@ export default function Connect() {
         const fetchFollowing = async () => {
             const res = await client.getFollowing(user);
             if (res.status === 200) {
+                console.log('connect', res.data)
                 setFollowing(res.data)
             } else {
                 toast({

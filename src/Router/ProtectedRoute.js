@@ -7,7 +7,7 @@ export default function ProtectedRoute({ element, influencerOnly }) {
     const navigate = useNavigate();
 
     if (influencerOnly === true) {
-        if (user === undefined && user === null && user === 'null') {
+        if (user === undefined || user === null || user === 'null') {
             navigate('login')
         }
         return user !== undefined && user !== null && user !== 'null' && role === 'influencer' ? element : <Navigate to={'/profile'} replace />;

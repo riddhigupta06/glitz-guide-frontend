@@ -43,11 +43,11 @@ const InlfuencerCard = ({
                     <Text>{influencer.bio}</Text>
                     <VStack width={'100%'}>
                         {isFollowing ? (
-                            <Button onClick={() => handleUnfollowClicked(influencer.username)} width={'100%'} colorScheme="pink" variant='outline' leftIcon={<FontAwesomeIcon icon={faMinus} />}>
+                            <Button onClick={() => handleUnfollowClicked(influencer)} width={'100%'} colorScheme="pink" variant='outline' leftIcon={<FontAwesomeIcon icon={faMinus} />}>
                                 Unfollow
                             </Button>
                         ) : (
-                            <Button onClick={() => handleFollowClicked(influencer.username)} width={'100%'} colorScheme="pink" variant='solid' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+                            <Button onClick={() => handleFollowClicked(influencer)} width={'100%'} colorScheme="pink" variant='solid' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                                 Follow
                             </Button>
                         )}

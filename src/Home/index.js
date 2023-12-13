@@ -9,6 +9,7 @@ import UserDiscussions from "../Profile/UserDiscussions";
 import UserReviews from "../Profile/UserReviews";
 import AnonymousInlfuencerCard from "../Connect/AnonymousInfluencerCard";
 import * as client from "../client";
+import './index.css'
 
 export default function Home() {
     const user = sessionStorage.getItem("user")
@@ -50,16 +51,16 @@ export default function Home() {
     return (
         <Box>
             <Center marginBottom={7} height={'400px'} width={'100%'} backgroundImage={require('./images/makeupbg.png')} backgroundRepeat={'repeat'} backgroundColor={'pink'}>
-                <VStack  padding={10} backgroundColor={'black'}>
-                <Heading color={'#D58AB0'} as={'h1'} size={'4xl'}>{getHeading()}</Heading>
-                    <Heading color={'#D58AB0'} as={'h6'} size={'xl'} fontWeight={300}>{getSubheading()}</Heading>
+                <VStack padding={10} backgroundColor={'black'}>
+                    <Heading color={'#D58AB0'} as={'h1'} size={'4xl'} textAlign={'center'}>{getHeading()}</Heading>
+                    <Heading color={'#D58AB0'} as={'h6'} size={'xl'} textAlign={'center'} fontWeight={300}>{getSubheading()}</Heading>
                 </VStack>
             </Center>
-            <HStack>
-                <Box width={'50%'} alignSelf={'flex-start'}>
+            <div className="main-box">
+                <Box width={'50%'} alignSelf={'flex-start'} className="left-column">
                     <SearchSnippet />
                 </Box>
-                <Box width={'50%'} alignSelf={'flex-start'}>
+                <Box width={'50%'} alignSelf={'flex-start'} className="right-column">
                     {user === null || user === undefined || user === 'null' ? (
                         <ConnectSnippet />
                     ) : role === 'influencer' ? (
@@ -112,7 +113,7 @@ export default function Home() {
                         </Box>
                     )}
                 </Box>
-            </HStack>
+            </div>
             <Center height={'100px'} />
         </Box>
     )

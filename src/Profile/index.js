@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Box, Button, Spinner, Heading, Badge, IconButton, Tooltip, useToast, HStack } from "@chakra-ui/react";
+import { Box, Button, Spinner, Heading, Badge, IconButton, Tooltip, useToast, HStack, VStack } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCamera, faLink, faPencil, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import Avatar from "../Avatar";
@@ -156,9 +156,9 @@ export default function Profile() {
                                 </div>
                             </>
                         ) : (
-                            <div style={{padding:50, paddingTop:60, width:"100%"}}>
+                            <HStack alignSelf={'flex-start'} style={{padding:50, paddingTop:60, width:"100%"}}>
                                 <UpdateProfileForm profile={profile} handleUpdate={handleUpdate} handleCancel={() => setIsEditing(false)} />
-                            </div>
+                            </HStack>
                         )}
                     </div>
                     <div className="reviews-box">

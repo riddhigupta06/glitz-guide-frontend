@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import { Heading, Box, HStack, Select, Button, Spinner, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb } from "@chakra-ui/react";
+import { Heading, Box, HStack, Select, Button, Spinner } from "@chakra-ui/react";
 import { brands, productTypes } from "./data";
 import { useSearchParams } from "react-router-dom";
 import * as client from "../client";
@@ -56,6 +56,8 @@ export default function Search() {
 
     useEffect(() => {
         fetchProducts()
+
+        // eslint-disable-next-line
     }, [pageIndex, searchParams])
 
     return (

@@ -5,22 +5,22 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import * as client from "../client";
 
-const UserReviews = ({ username }) => {
-    const [reviews, setReviews] = useState(undefined)
+const UserDiscussions = ({ username }) => {
+    const [discussions, setDiscussions] = useState(undefined)
     const navigate = useNavigate()
 
     useEffect(() => {
-        const fetchReviews = async () => {
-            const data = await client.getUserReviews(username)
-            setReviews(data)
+        const fetchDiscussions = async () => {
+            const data = await client.getUserPosts(username)
+            setDiscussions(data)
         }
 
-        fetchReviews()
+        fetchDiscussions()
 
     // eslint-disable-next-line
     }, [])
 
-    if (reviews === undefined) {
+    if (discussions === undefined) {
         return (
             <Center>
                 Loading... <Spinner />
@@ -28,15 +28,15 @@ const UserReviews = ({ username }) => {
         )
     } else {
         return (
-            <Flex direction={'column'} gap={2} marginTop={5}>
-                {reviews.length === 0 ? (
-                    <div>You haven't written any reviews! Review products <Link style={{color:'purple', fontWeight:600}} to={'/search'}>here.</Link></div>
+            <Flex direction={'column'} gap={2}>
+                {discussions.length === 0 ? (
+                    <div>You haven't written any discussion posts! Write some posts <Link style={{color:'purple', fontWeight:600}} to={'/discuss'}>here.</Link></div>
                 ) : (
-                    reviews.map((review, idx) => {
+                    discussions.map((discussion, idx) => {
                         return (
                             <Flex key={idx} direction={'row'} justifyContent={'flex-start'} alignItems={'center'} gap={2}>
-                                <IconButton onClick={() => navigate(`/details/${review.pid}`)} icon={<FontAwesomeIcon icon={faArrowUpRightFromSquare} />}>Open</IconButton>
-                                {review.review}
+                                <IconButton onClick={() => navigate(`/discuss`)} icon={<FontAwesomeIcon icon={faArrowUpRightFromSquare} />}>Open</IconButton>
+                                {discussion.title}
                             </Flex>
                         )
                     })
@@ -46,4 +46,4 @@ const UserReviews = ({ username }) => {
     }
 }
 
-export default UserReviews;
+export default UserDiscussions;

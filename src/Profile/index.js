@@ -9,6 +9,7 @@ import "./index.css"
 import UserReviews from "./UserReviews";
 import UpdateProfileForm from "./UpdateProfileForm";
 import FollowingCard from './FollowingCard';
+import UserDiscussions from "./UserDiscussions";
 
 export default function Profile() {
     const [profile, setProfile] = useState(undefined)
@@ -164,9 +165,24 @@ export default function Profile() {
                         {profile.role === "influencer" && (
                             <>
                             <Box marginBottom={5}>
-                                <Heading as={'h6'} size={'md'}>My Reviews</Heading>
+                                <Heading as={'h6'} size={'md'}>My reviews</Heading>
                                 <UserReviews username={profile.username} />
                             </Box>
+                            <Box marginBottom={5}>
+                                {/* <Heading as={'h6'} size={'md'}>My discussion posts</Heading> */}
+                                <HStack width={'100%'} justifyContent={'space-between'}>
+                                    <Heading as={'h6'} size={'md'}>My discussion posts</Heading>
+                                    <IconButton
+                                        variant='ghost'
+                                        colorScheme='gray'
+                                        aria-label='connect'
+                                        onClick={() => navigate(`/discuss`)}
+                                        icon={<FontAwesomeIcon icon={faArrowUpRightFromSquare} />}
+                                    />
+                                </HStack>
+                                <UserDiscussions username={profile.username} />
+                            </Box>
+                            
                             <Box marginBottom={5}>
                                 <HStack width={'100%'} justifyContent={'space-between'}>
                                     <Heading as={'h6'} size={'md'}>My followers</Heading>

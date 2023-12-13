@@ -39,9 +39,7 @@ export default function Discussion() {
   useEffect(() => {
     const fetchPosts = async () => {
       const fetched = await client.getPosts();
-      console.log(fetched);
       setPosts(fetched.data);
-      console.log(posts);
     };
     fetchPosts();
   }, []);

@@ -64,9 +64,9 @@ export default function Home() {
                         <ConnectSnippet />
                     ) : role === 'influencer' ? (
                         <Box padding={3} width={'100%'} alignItems={'flex-start'}>
-                            <Box marginBottom={5}>
-                                <HStack width={'100%'}>
-                                    <Heading as={'h6'} size={'md'}>My discussion posts</Heading>
+                            <VStack width={'100%'} alignItems={'flex-start'} marginBottom={7} gap={3}>
+                                <HStack width={'100%'} gap={3}>
+                                    <Heading as={'h6'} size={'lg'}>My discussion posts</Heading>
                                     <IconButton
                                         variant='ghost'
                                         colorScheme='gray'
@@ -76,17 +76,17 @@ export default function Home() {
                                     />
                                 </HStack>
                                 <UserDiscussions username={user} />
-                            </Box>
+                            </VStack>
 
-                            <Box marginBottom={5}>
-                                <Heading as={'h6'} size={'md'}>My reviews</Heading>
+                            <VStack width={'100%'} alignItems={'flex-start'} marginBottom={5}>
+                                <Heading as={'h6'} size={'lg'}>My reviews</Heading>
                                 <UserReviews username={user} />
-                            </Box>
+                            </VStack>
                         </Box>
                     ) : (
                         <Box padding={3}>
-                            <HStack width={'100%'}>
-                                <Heading as={'h6'} size={'md'}>My following</Heading>
+                            <HStack width={'100%'} gap={3}>
+                                <Heading as={'h6'} size={'lg'}>My following</Heading>
                                 <IconButton
                                     variant='ghost'
                                     colorScheme='gray'

@@ -28,7 +28,7 @@ const UserReviews = ({ username }) => {
         )
     } else {
         return (
-            <Flex direction={'column'} gap={2} marginTop={5}>
+            <Flex direction={'column'} gap={2}>
                 {reviews.length === 0 ? (
                     <div>You haven't written any reviews! Review products <Link style={{color:'purple', fontWeight:600}} to={'/search'}>here.</Link></div>
                 ) : (

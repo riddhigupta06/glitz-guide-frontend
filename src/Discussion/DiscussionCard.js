@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, VStack } from "@chakra-ui/react";
+import { Card, Divider, VStack } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import { IconButton, Textarea } from "@chakra-ui/react";
@@ -73,8 +73,8 @@ const DiscussionCard = ({ post, handleRefresh }) => {
 
   return (
     <Card width="100%" marginBottom={5}>
-      <HStack alignItems="start" gap={5}>
-        <Box padding={5} width={"200px"}>
+      <HStack alignItems="flex-start" gap={5}>
+        <Box padding={5} paddingBottom={0} width={"200px"}>
           <VStack alignItems={'center'} justifyContent={'center'}>
               <Box width={'100px'} height={'100px'}>
                 <Avatar title={post.avatar} />
@@ -86,6 +86,7 @@ const DiscussionCard = ({ post, handleRefresh }) => {
               </Text>
           </VStack>
         </Box>
+
         {!isEditing ? (
           <Box padding={5} paddingTop={10}>
             <VStack alignItems={'flex-start'}>
@@ -103,7 +104,7 @@ const DiscussionCard = ({ post, handleRefresh }) => {
           </Box>
         )}
 
-        {username === post.username ? (
+        {username === post.username && (
           <HStack gap={5}>
             <Box>
               <IconButton
@@ -128,27 +129,26 @@ const DiscussionCard = ({ post, handleRefresh }) => {
               />
             </Box>
           </HStack>
-        ) : (
-          <></>
         )}
       </HStack>
-      <VStack alignItems={'flex-start'} width={'100%'}>
-        <Heading as={'h5'} size={'sm'} marginLeft={5}>
+      <VStack alignItems={'flex-start'} width={'100%'} paddingLeft={5} paddingRight={5}>
+        <Divider />
+        <Heading as={'h5'} size={'sm'}>
           Replies ({allReps.length})
         </Heading>
         {allReps.length === 0 ? (
-          <Box marginLeft={5}>
+          <Box  paddingBottom={5}>
             There are no replies right now. Add one!
           </Box>
         ) : (
-          <VStack width={'100%'} alignItems={'flex-start'} paddingTop={3} paddingRight={10}>
+          <VStack width={'100%'} alignItems={'flex-start'} paddingTop={3} paddingRight={5}>
             {allReps.map((reply, idx) => (
             <HStack width={'100%'} key={idx} justifyContent={'space-between'}>
               <HStack width={'100%'}>
-                <Text width={'10%'} marginLeft={5} color={"#D53F8C"}>
+                <Text width={'10%'} color={"#D53F8C"}>
                   <NavLink to={`/profile/${reply.username}`}><strong>{reply.firstName} {reply.lastName}</strong></NavLink>
                 </Text>
-                <Text marginLeft={5}>
+                <Text>
                   {reply.reply}{" "}
                 </Text>
               </HStack>

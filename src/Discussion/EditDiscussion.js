@@ -36,7 +36,7 @@ const EditDiscussion = ({ post, handleUpdate, handleCancel }) => {
                 isInvalid={form.errors.firstName && form.touched.firstName}
               >
                 <HStack>
-                  <FormLabel>Title: </FormLabel>
+                  <FormLabel>Title </FormLabel>
                   <Input {...field} placeholder="title" />
                 </HStack>
               </FormControl>
@@ -48,7 +48,7 @@ const EditDiscussion = ({ post, handleUpdate, handleCancel }) => {
                 isInvalid={form.errors.firstName && form.touched.firstName}
               >
                 <HStack>
-                  <FormLabel>Body: </FormLabel>
+                  <FormLabel>Body </FormLabel>
                   <Textarea {...field} />
                 </HStack>
               </FormControl>

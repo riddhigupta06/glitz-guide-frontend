@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Center, Spinner, Flex, IconButton } from "@chakra-ui/react";
-import * as client from "../client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import * as client from "../client";
 
 const UserReviews = ({ username }) => {
     const [reviews, setReviews] = useState(undefined)

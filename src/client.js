@@ -14,8 +14,6 @@ export const DISCUSSION_API = `${BASE_API}/discussion`;
 export const INFLUENCERS_API = `${BASE_API}/influencers`;
 export const REPLY_API = `${BASE_API}/replies`;
 
-
-
 // search endpoint
 export const search = async (pageIndex, queryString) => {
     const response = await request.get(`${SEARCH_API}/${pageIndex}${queryString}`);

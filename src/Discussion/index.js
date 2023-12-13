@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import * as client from "../client";
 import {
   Box,
   Text,
@@ -13,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import "./index.css";
 import DiscussionCard from "./DiscussionCard";
+import * as client from "../client";
 
 export default function Discussion() {
   const [newTitle, setNewTitle] = useState("");

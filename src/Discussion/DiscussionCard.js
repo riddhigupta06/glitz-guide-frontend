@@ -1,8 +1,6 @@
-import { Card, CardBody, VStack } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Card, VStack } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import * as client from "../client";
-import Avatar from "../Avatar";
 import { NavLink } from "react-router-dom";
 import { IconButton, Textarea } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,6 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Box, Heading, HStack } from "@chakra-ui/react";
 import EditDiscussion from "./EditDiscussion";
+import * as client from "../client";
+import Avatar from "../Avatar";
 
 const DiscussionCard = ({ post, handleRefresh }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -24,12 +24,8 @@ const DiscussionCard = ({ post, handleRefresh }) => {
     setIsEditing(!isEditing);
   };
 
-  const handleDeleteReply = async (id) => {
-    const res = await client.deleteReply(id);
-    const fetched = await client.getReplies(post._id);
-    setAllReps(fetched.data);
-  }
   const username = sessionStorage.getItem("user");
+
   const addReply = async () => {
     if (reply != "") {
       const replyObj = {
@@ -43,13 +39,16 @@ const DiscussionCard = ({ post, handleRefresh }) => {
       setReply("");
     }
   };
+
   const handleDelete = async () => {
     const res = await client.deletePost(post._id);
     handleRefresh();
   };
+
   const handleCancel = () => {
     setIsEditing(false);
   };
+
   const handleUpdate = async (values, actions) => {
     const p = {
       username: post.username,
@@ -60,6 +59,7 @@ const DiscussionCard = ({ post, handleRefresh }) => {
     setPost(p);
     setIsEditing(false);
   };
+
   useEffect(() => {
     const fetchReplies = async () => {
       const fetchedReplies = await client.getReplies(post._id);
@@ -67,6 +67,7 @@ const DiscussionCard = ({ post, handleRefresh }) => {
     };
     fetchReplies();
   }, []);
+
   return (
     <Card width="100%" marginBottom={5}>
       <HStack alignItems="start" gap={5}>

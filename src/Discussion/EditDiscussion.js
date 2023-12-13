@@ -7,13 +7,15 @@ import {
   Input,
   Button
 } from "@chakra-ui/react";
+
 const EditDiscussion = ({ post, handleUpdate, handleCancel }) => {
     
   return (
-    <Formik initialValues={{ title: post.title, body: post.body }}
-    onSubmit={async (values, actions) =>
-        await handleUpdate(values, actions)
-      }
+    <Formik 
+      initialValues={{ title: post.title, body: post.body }}
+      onSubmit={async (values, actions) =>
+          await handleUpdate(values, actions)
+        }
     >
       {(props) => (
         <Form

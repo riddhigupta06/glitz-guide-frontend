@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import { Heading, Box, HStack, Select, Button, Spinner, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb } from "@chakra-ui/react";
+import { Heading, Box, HStack, Select, Button, Spinner } from "@chakra-ui/react";
 import { brands, productTypes } from "./data";
 import { useSearchParams } from "react-router-dom";
 import * as client from "../client";
@@ -14,8 +14,8 @@ export default function Search() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [brand, setBrand] = useState(searchParams.get("brand"))
     const [productType, setProductType] = useState(searchParams.get("productType"))
-    const [minPrice, setMinPrice] = useState(searchParams.get("minPrice"))
-    const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice"))
+    // const [minPrice, setMinPrice] = useState(searchParams.get("minPrice"))
+    // const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice"))
 
     const getSearchQuery = () => {
         let searchQuery = "?" 
@@ -24,12 +24,6 @@ export default function Search() {
         }
         if (productType !== null && productType !== "" && productType !== "null") {
             searchQuery += `&productType=${productType}`
-        }
-        if (minPrice !== null && minPrice !== "" && minPrice !== "null") {
-            searchQuery += `&minPrice=${minPrice}`
-        }
-        if (maxPrice !== null && maxPrice !== "" && maxPrice !== "null") {
-            searchQuery += `&maxPrice=${maxPrice}`
         }
 
         if (searchQuery === "?") {
@@ -54,7 +48,7 @@ export default function Search() {
     }
  
     const handleFilter = () => {
-        setSearchParams({ brand, productType, minPrice, maxPrice })
+        setSearchParams({ brand, productType })
         setIsLoading(true)
         setPageIndex(1)
         setProducts([])
@@ -62,6 +56,8 @@ export default function Search() {
 
     useEffect(() => {
         fetchProducts()
+
+        // eslint-disable-next-line
     }, [pageIndex, searchParams])
 
     return (
@@ -77,7 +73,7 @@ export default function Search() {
                     {productTypes.map((type, idx) => <option key={idx} value={type.name}>{type.title}</option>)}
                 </Select>
 
-                <RangeSlider
+                {/* <RangeSlider
                     aria-label={['min', 'max']}
                     colorScheme='pink'
                     min={0}
@@ -101,7 +97,7 @@ export default function Search() {
                     <RangeSliderThumb boxSize={10} index={1}>
                         {maxPrice}
                     </RangeSliderThumb>
-                </RangeSlider>
+                </RangeSlider> */}
 
                 <Button onClick={handleFilter} variant='outline' colorScheme='pink' width={200}>
                     Filter

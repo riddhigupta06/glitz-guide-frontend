@@ -14,8 +14,6 @@ export const DISCUSSION_API = `${BASE_API}/discussion`;
 export const INFLUENCERS_API = `${BASE_API}/influencers`;
 export const REPLY_API = `${BASE_API}/replies`;
 
-
-
 // search endpoint
 export const search = async (pageIndex, queryString) => {
     const response = await request.get(`${SEARCH_API}/${pageIndex}${queryString}`);
@@ -146,19 +144,25 @@ export const getFollowers = async (username) => {
     }
 }
 
-//creates a new discussion post
+// creates a new discussion post
 export const writePost = async (username, post) => {
     const status = await request.post(`${DISCUSSION_API}/new/${username}`, post);
     return status
 }
 
-//gets all discussion posts
+// gets all discussion posts
 export const getPosts = async () => {
     const status = await request.get(`${DISCUSSION_API}`);
     return status;
 }
 
-//updates discussion post
+// gets all discussion posts for the given user
+export const getUserPosts = async (username) => {
+    const response = await request.get(`${DISCUSSION_API}/${username}`);
+    return response.data;
+}
+
+// updates discussion post
 export const updatePost = async (id, post) => {
     const status = await request.put(`${DISCUSSION_API}/${id}`, post);
     return status;  

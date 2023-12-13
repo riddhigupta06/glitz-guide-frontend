@@ -35,14 +35,14 @@ export default function Connect() {
     // eslint-disable-next-line
     }, [])
     
-    const handleFollowClicked = async (influencerUsername) => {
-        await client.followInfluencer(influencerUsername);
-        setFollowing([...following, influencerUsername])
+    const handleFollowClicked = async (influencer) => {
+        await client.followInfluencer(influencer.username);
+        setFollowing([...following, influencer])
     }
 
-    const handleUnfollowClicked = async (influencerUsername) => {
-        await client.unfollowInfluencer(influencerUsername);
-        setFollowing(following.filter((f) => f !== influencerUsername))
+    const handleUnfollowClicked = async (influencer) => {
+        await client.unfollowInfluencer(influencer.username);
+        setFollowing(following.filter((f) => f.username !== influencer.username))
     }
 
     if (influencers) {

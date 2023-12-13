@@ -1,0 +1,31 @@
+.main-box {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+}
+
+.left-column {
+    width: 50%;
+    height: 100%;
+}
+
+.right-column {
+    width: 50%;
+    height: 100%;
+}
+
+@media (max-width: 850px) {
+    .main-box {
+        display: block !important;
+        height: auto !important;
+    }
+    
+    .left-column {
+        width: 100%;
+    }
+    
+    .right-column {
+        width: 100%;
+    }
+}

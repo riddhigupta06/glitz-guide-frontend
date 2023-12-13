@@ -14,12 +14,12 @@ const ProductReviews = ({ productID }) => {
     const username = sessionStorage.getItem("user")
     const role = sessionStorage.getItem("role")
 
-    useEffect(() => {
-        const fetchReviews = async () => {
-            const data = await client.getProductReviews(productID)
-            setReviews(data)
-        }
+    const fetchReviews = async () => {
+        const data = await client.getProductReviews(productID)
+        setReviews(data)
+    }
 
+    useEffect(() => {
         fetchReviews()
     
     // eslint-disable-next-line
@@ -33,7 +33,7 @@ const ProductReviews = ({ productID }) => {
         if (newReview !== '') {
             const review = {pid: productID, username: username, review: newReview}
             await client.createReview(review)
-            setReviews([review, ...reviews])
+            await fetchReviews()
             setNewReview('')
         }
     }
@@ -56,7 +56,7 @@ const ProductReviews = ({ productID }) => {
 
     const updateReview = async (review) => {
         await client.updateReview(review._id, review)
-        setReviews(reviews.map((r) => r._id === review._id ? review : r))
+        await fetchReviews()
         setIsEditing(false)
         setEditedReview({})
     }

@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { ChakraProvider } from '@chakra-ui/react'
-import './index.css';
 import RouterErrorPage from './Router/RouterErrorPage';
 import reportWebVitals from './reportWebVitals';
 import Root from './Router/Root';
@@ -19,6 +18,7 @@ import AnonymousRoute from './Router/AnonymousRoute';
 import PublicProfile from './PublicProfile';
 import Connect from './Connect';
 import Discussion from './Discussion';
+import './index.css';
 
 const router = createBrowserRouter([
   {

@@ -1,9 +1,6 @@
-import { Card, CardBody, CardHeader, VStack } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Card, Divider, VStack } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import * as client from "../client";
-import Avatar from "../Avatar";
-import { Navigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { IconButton, Textarea } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,9 +9,11 @@ import {
   faReply,
   faPencil,
 } from "@fortawesome/free-solid-svg-icons";
-import { Center, Box, Heading, HStack } from "@chakra-ui/react";
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import EditDiscussion from "./EditDiscussion";
-import { replace } from "formik";
+import * as client from "../client";
+import Avatar from "../Avatar";
+
 const DiscussionCard = ({ post, handleRefresh }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [currPost, setPost] = useState(post);
@@ -25,99 +24,87 @@ const DiscussionCard = ({ post, handleRefresh }) => {
     setIsEditing(!isEditing);
   };
 
-  const handleDeleteReply = async (id) => {
-    const res = await client.deleteReply(id);
-    const fetched = await client.getReplies(post._id);
-    setAllReps(fetched.data);
-  }
   const username = sessionStorage.getItem("user");
+
   const addReply = async () => {
-    if (reply != "") {
+    if (reply !== "") {
       const replyObj = {
         username: username,
         reply: reply,
         discussionId: post._id,
       };
-      const res = await client.writeReply(post._id, replyObj);
+      await client.writeReply(post._id, replyObj);
       const fetched = await client.getReplies(post._id);
       setAllReps(fetched.data);
       setReply("");
     }
   };
+
   const handleDelete = async () => {
-    const res = await client.deletePost(post._id);
+    await client.deletePost(post._id);
     handleRefresh();
   };
+
   const handleCancel = () => {
     setIsEditing(false);
   };
+
   const handleUpdate = async (values, actions) => {
-    console.log(values);
     const p = {
       username: post.username,
       title: values.title,
       body: values.body,
     };
-    const data = await client.updatePost(currPost._id, p);
+    await client.updatePost(currPost._id, p);
     setPost(p);
     setIsEditing(false);
   };
+
   useEffect(() => {
     const fetchReplies = async () => {
       const fetchedReplies = await client.getReplies(post._id);
-      console.log(fetchedReplies.data);
       setAllReps(fetchedReplies.data);
     };
+
     fetchReplies();
+
+  // eslint-disable-next-line
   }, []);
+
   return (
-    <Card marginBottom={10}>
-      <HStack alignItems="start" gap={5}>
-        <Box>
-          <CardHeader>
-            <Box width={"100px"}>
-              <VStack paddingLeft={9}>
-                <Center width={"150px"}>
-                  <Avatar title={post.avatar} />
-                </Center>
-                <Center>
-                  <Text color={"darkblue"}>
-                    <NavLink to={`/profile/${post.username}`}>
-                      <HStack>
-                        <strong>{post.firstName}</strong>
-                        <strong>{post.lastName}</strong>
-                      </HStack>
-                    </NavLink>
-                  </Text>
-                </Center>
-              </VStack>
-            </Box>
-            <br />
-          </CardHeader>
+    <Card width="100%" marginBottom={5}>
+      <HStack alignItems="flex-start" gap={5}>
+        <Box padding={5} paddingBottom={0} width={"200px"}>
+          <VStack alignItems={'center'} justifyContent={'center'}>
+              <Box width={'100px'} height={'100px'}>
+                <Avatar title={post.avatar} />
+              </Box>
+              <Text textAlign={'center'} width={'100%'} color={"darkblue"}>
+                <NavLink to={`/profile/${post.username}`}>
+                    <strong>{post.firstName} {post.lastName}</strong>
+                </NavLink>
+              </Text>
+          </VStack>
         </Box>
+
         {!isEditing ? (
-          <>
-            <Box>
-              <VStack>
-                <CardBody>
-                  <Heading size="md">{currPost.title}</Heading>
-                  <Text>{currPost.body}</Text>
-                  <HStack></HStack>
-                </CardBody>
-              </VStack>
-            </Box>
-          </>
+          <Box padding={5} paddingTop={10}>
+            <VStack alignItems={'flex-start'}>
+                <Heading size="md">{currPost.title}</Heading>
+                <Text>{currPost.body}</Text>
+            </VStack>
+          </Box>
         ) : (
-          <div style={{ width: "80%" }}>
+          <Box width="100%" padding={5} paddingTop={'50px'}>
             <EditDiscussion
               post={currPost}
               handleCancel={handleCancel}
               handleUpdate={handleUpdate}
             />
-          </div>
+          </Box>
         )}
 
-        {username == post.username ? (
+        {username === post.username && (
           <HStack gap={5}>
             <Box>
               <IconButton
@@ -142,50 +129,48 @@ const DiscussionCard = ({ post, handleRefresh }) => {
               />
             </Box>
           </HStack>
-        ) : (
-          <></>
         )}
       </HStack>
-      <div>
-        <Text marginLeft={5}>
-          <strong>Replies: </strong>
-        </Text>
+      <VStack alignItems={'flex-start'} width={'100%'} paddingLeft={5} paddingRight={5}>
+        <Divider />
+        <Heading as={'h5'} size={'sm'}>
+          Replies ({allReps.length})
+        </Heading>
         {allReps.length === 0 ? (
-          <></>
+          <Box  paddingBottom={5}>
+            There are no replies right now. Add one!
+          </Box>
         ) : (
-          allReps.map((reply) => (
-            <HStack>
-              <Text marginLeft={5} color={"#D53F8C"}>
-                <NavLink to={`/profile/${post.username}`}>
-                  <HStack>
-                    <Text><strong>{reply.firstName} {reply.lastName} </strong> : {reply.reply}{" "}
-                    </Text>
-                  </HStack>
-                </NavLink>
-              </Text>
-              {username == reply.username ? (
-                <>
-                  <IconButton
-                    colorScheme="red"
-                    variant={"outline"}
-                    aria-label="edit profile"
-                    size="md"
-                    icon={<FontAwesomeIcon icon={faTrashCan} />}
-                    onClick={async () => {
-                        const res = await client.deleteReply(reply._id);
-                        const fetched = await client.getReplies(post._id);
-                        setAllReps(fetched.data);
-                      }}
-                    style={{ position: "absolute", right: 10 }}
-                  />
-                </>
-              ) : (
-                <></>
+          <VStack width={'100%'} alignItems={'flex-start'} paddingTop={3} paddingRight={5}>
+            {allReps.map((reply, idx) => (
+            <HStack width={'100%'} key={idx} justifyContent={'space-between'}>
+              <HStack width={'100%'}>
+                <Text width={'10%'} color={"#D53F8C"}>
+                  <NavLink to={`/profile/${reply.username}`}><strong>{reply.firstName} {reply.lastName}</strong></NavLink>
+                </Text>
+                <Text>
+                  {reply.reply}{" "}
+                </Text>
+              </HStack>
+              {username === reply.username && (
+                <IconButton
+                  colorScheme="red"
+                  variant={"outline"}
+                  aria-label="edit profile"
+                  size="md"
+                  icon={<FontAwesomeIcon icon={faTrashCan} />}
+                  onClick={async () => {
+                      await client.deleteReply(reply._id);
+                      const fetched = await client.getReplies(post._id);
+                      setAllReps(fetched.data);
+                    }}
+                />
               )}
             </HStack>
-          ))
+          ))}
+          </VStack>
         )}
-      </div>
+      </VStack>
       <HStack margin={5} marginTop={0}>
         <Box flex={1}>
           <Textarea

@@ -7,13 +7,15 @@ import {
   Input,
   Button
 } from "@chakra-ui/react";
+
 const EditDiscussion = ({ post, handleUpdate, handleCancel }) => {
     
   return (
-    <Formik initialValues={{ title: post.title, body: post.body }}
-    onSubmit={async (values, actions) =>
-        await handleUpdate(values, actions)
-      }
+    <Formik 
+      initialValues={{ title: post.title, body: post.body }}
+      onSubmit={async (values, actions) =>
+          await handleUpdate(values, actions)
+        }
     >
       {(props) => (
         <Form
@@ -34,7 +36,7 @@ const EditDiscussion = ({ post, handleUpdate, handleCancel }) => {
                 isInvalid={form.errors.firstName && form.touched.firstName}
               >
                 <HStack>
-                  <FormLabel>Title: </FormLabel>
+                  <FormLabel>Title </FormLabel>
                   <Input {...field} placeholder="title" />
                 </HStack>
               </FormControl>
@@ -46,28 +48,31 @@ const EditDiscussion = ({ post, handleUpdate, handleCancel }) => {
                 isInvalid={form.errors.firstName && form.touched.firstName}
               >
                 <HStack>
-                  <FormLabel>Body: </FormLabel>
+                  <FormLabel>Body </FormLabel>
                   <Textarea {...field} />
                 </HStack>
               </FormControl>
             )}
           </Field>
-          <Button
-            width={"100%"}
-            colorScheme="red"
-            onClick={handleCancel}
-            type="cancel"
-          >
-            Cancel
-          </Button>
-          <Button
-            width={"100%"}
-            colorScheme="pink"
-            isLoading={props.isSubmitting}
-            type="submit"
-          >
-            Update
-          </Button>
+          <HStack>
+            <Button
+              width={"50%"}
+              colorScheme="pink"
+              isLoading={props.isSubmitting}
+              type="submit"
+            >
+              Update
+            </Button>
+            <Button
+              width={"50%"}
+              colorScheme="red"
+              variant={'outline'}
+              onClick={handleCancel}
+              type="cancel"
+            >
+              Cancel
+            </Button>
+          </HStack>
         </Form>
       )}
     </Formik>

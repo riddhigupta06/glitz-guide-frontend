@@ -9,6 +9,7 @@ import "./index.css"
 import UserReviews from "./UserReviews";
 import UpdateProfileForm from "./UpdateProfileForm";
 import FollowingCard from './FollowingCard';
+import UserDiscussions from "./UserDiscussions";
 
 export default function Profile() {
     const [profile, setProfile] = useState(undefined)
@@ -155,18 +156,32 @@ export default function Profile() {
                                 </div>
                             </>
                         ) : (
-                            <div style={{padding:50, paddingTop:60, width:"100%"}}>
+                            <HStack alignSelf={'flex-start'} style={{padding:50, paddingTop:60, width:"100%"}}>
                                 <UpdateProfileForm profile={profile} handleUpdate={handleUpdate} handleCancel={() => setIsEditing(false)} />
-                            </div>
+                            </HStack>
                         )}
                     </div>
                     <div className="reviews-box">
                         {profile.role === "influencer" && (
                             <>
                             <Box marginBottom={5}>
-                                <Heading as={'h6'} size={'md'}>My Reviews</Heading>
+                                <Heading as={'h6'} size={'md'}>My reviews</Heading>
                                 <UserReviews username={profile.username} />
                             </Box>
+                            <Box marginBottom={5}>
+                                <HStack width={'100%'} justifyContent={'space-between'}>
+                                    <Heading as={'h6'} size={'md'}>My discussion posts</Heading>
+                                    <IconButton
+                                        variant='ghost'
+                                        colorScheme='gray'
+                                        aria-label='connect'
+                                        onClick={() => navigate(`/discuss`)}
+                                        icon={<FontAwesomeIcon icon={faArrowUpRightFromSquare} />}
+                                    />
+                                </HStack>
+                                <UserDiscussions username={profile.username} />
+                            </Box>
+                            
                             <Box marginBottom={5}>
                                 <HStack width={'100%'} justifyContent={'space-between'}>
                                     <Heading as={'h6'} size={'md'}>My followers</Heading>

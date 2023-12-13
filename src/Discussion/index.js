@@ -29,7 +29,7 @@ export default function Discussion() {
   const addPost = async () => {
     if (newPost !== "") {
       const post = { username: username, title: newTitle, body: newPost };
-      const res = await client.writePost(username, post);
+      await client.writePost(username, post);
       const fetched = await client.getPosts();
       setPosts(fetched.data);
       setNewPost("");

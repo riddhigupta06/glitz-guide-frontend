@@ -27,13 +27,13 @@ const DiscussionCard = ({ post, handleRefresh }) => {
   const username = sessionStorage.getItem("user");
 
   const addReply = async () => {
-    if (reply != "") {
+    if (reply !== "") {
       const replyObj = {
         username: username,
         reply: reply,
         discussionId: post._id,
       };
-      const res = await client.writeReply(post._id, replyObj);
+      await client.writeReply(post._id, replyObj);
       const fetched = await client.getReplies(post._id);
       setAllReps(fetched.data);
       setReply("");
@@ -41,7 +41,7 @@ const DiscussionCard = ({ post, handleRefresh }) => {
   };
 
   const handleDelete = async () => {
-    const res = await client.deletePost(post._id);
+    await client.deletePost(post._id);
     handleRefresh();
   };
 
@@ -55,7 +55,7 @@ const DiscussionCard = ({ post, handleRefresh }) => {
       title: values.title,
       body: values.body,
     };
-    const data = await client.updatePost(currPost._id, p);
+    await client.updatePost(currPost._id, p);
     setPost(p);
     setIsEditing(false);
   };
@@ -65,7 +65,10 @@ const DiscussionCard = ({ post, handleRefresh }) => {
       const fetchedReplies = await client.getReplies(post._id);
       setAllReps(fetchedReplies.data);
     };
+
     fetchReplies();
+
+  // eslint-disable-next-line
   }, []);
 
   return (
@@ -149,7 +152,7 @@ const DiscussionCard = ({ post, handleRefresh }) => {
                   {reply.reply}{" "}
                 </Text>
               </HStack>
-              {username == reply.username && (
+              {username === reply.username && (
                 <IconButton
                   colorScheme="red"
                   variant={"outline"}
@@ -157,7 +160,7 @@ const DiscussionCard = ({ post, handleRefresh }) => {
                   size="md"
                   icon={<FontAwesomeIcon icon={faTrashCan} />}
                   onClick={async () => {
-                      const res = await client.deleteReply(reply._id);
+                      await client.deleteReply(reply._id);
                       const fetched = await client.getReplies(post._id);
                       setAllReps(fetched.data);
                     }}

@@ -17,6 +17,7 @@ const UserReviews = ({ username }) => {
 
         fetchReviews()
 
+    // eslint-disable-next-line
     }, [])
 
     if (reviews === undefined) {

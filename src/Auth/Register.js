@@ -16,10 +16,10 @@ import {
     IconButton,
     Box
 } from '@chakra-ui/react'
-import * as client from '../client'
 import * as Yup from 'yup'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import * as client from '../client'
 import Avatar from "../Avatar";
 
 const SignupSchema = Yup.object().shape({
@@ -44,7 +44,7 @@ export default function Register() {
         const res = await client.register(values)
         if (res['status'] === 200) {
             sessionStorage.setItem("user", res.data.username)
-            sessionStorage.setItem("role", res.data.username)
+            sessionStorage.setItem("role", res.data.role)
             actions.setSubmitting(false)
             navigate('/profile')
 

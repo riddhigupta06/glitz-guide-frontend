@@ -169,7 +169,6 @@ export default function Profile() {
                                 <UserReviews username={profile.username} />
                             </Box>
                             <Box marginBottom={5}>
-                                {/* <Heading as={'h6'} size={'md'}>My discussion posts</Heading> */}
                                 <HStack width={'100%'} justifyContent={'space-between'}>
                                     <Heading as={'h6'} size={'md'}>My discussion posts</Heading>
                                     <IconButton
